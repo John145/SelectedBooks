@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-4 11:18:08 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="cn.jxufe.domain.Role" table="ROLE">
+        <id name="rid" type="java.lang.Integer">
+            <column name="RID" />
+            <generator class="native" />
+        </id>
+        <property name="rname" type="java.lang.String">
+            <column name="RNAME" />
+        </property>
+        <set name="users">
+            <key>
+                <column name="RID" />
+            </key>
+            <one-to-many class="cn.jxufe.domain.User" />
+        </set>
+    </class>
+</hibernate-mapping>
