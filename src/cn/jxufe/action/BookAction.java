@@ -30,4 +30,19 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return "findAll";
 	}
+	private String keyword;
+	
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public String search() {
+		System.out.println(keyword);
+		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return "search";
+	}
+	
 }

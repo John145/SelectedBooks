@@ -35,6 +35,8 @@
     	<action name="book_*" class="bookAction" method="{1}">
     		<interceptor-ref name="permissionStack"></interceptor-ref>
     		<result name="findAll">/homepage.jsp</result>
+    		<result name="search">/search.jsp</result>
+    		
     	</action>
     </package>
 	

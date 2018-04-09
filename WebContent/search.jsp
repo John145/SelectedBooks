@@ -29,17 +29,19 @@
 </head>
 <body>
 
-	<form action="book_search" method="get">
+	<s:form action="book_search" method="get" theme="simple">
 	
 	
 	您好：<s:property value="#session.curUser.nickname"/><a href="user_logout">注销</a>
 	-<s:property value="#session.curUser.role.rname"/> 
 	<s:debug></s:debug>
 	<input name="curPage" type="hidden" value="1">
-	搜索：<input type="text" name="keyword"> 
+	搜索： 
+	<s:textfield name="keyword"></s:textfield>
 		<input type="submit" value="提交">
 	
-	</form>
+	</s:form>
+	
 	<div id="container">
 		<div id="outer">
 			<s:iterator value="list" var="b">
@@ -54,12 +56,12 @@
 			<span>总记录数：<s:property value="totalCount"/></span>
 			<span>
 				<s:if test="curPage != 1">
-					<a href="${pageContext.request.contextPath }/book_findAll?curPage=1">[首页]</a>
-					<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage-1" />">[上一页]</a>
+					<a href="${pageContext.request.contextPath }/book_search?curPage=1&keyword=<s:property value="keyword"/>">[首页]</a>
+					<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage-1" />&keyword=<s:property value="keyword"/>">[上一页]</a>
 				</s:if>
 				<s:if test="curPage != totalPage">
-					<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage+1" />">[下一页]</a>
-					<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="totalPage" />">[尾页]</a>
+					<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage+1" />&keyword=<s:property value="keyword"/>">[下一页]</a>
+					<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="totalPage" />&keyword=<s:property value="keyword"/>">[尾页]</a>
 				</s:if>
 			</span>
 		</div>
