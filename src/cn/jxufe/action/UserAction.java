@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -33,6 +35,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			this.addActionError("用户名密码错误!");
 			return INPUT;
 		}else {
+			HttpSession session = ServletActionContext.getRequest().getSession();
+			if(session != null) {
+				session.invalidate(); //解决同一浏览器不同用户登陆
+			}
 			ActionContext.getContext().getSession().put("curUser", curUser);
 			return SUCCESS;
 		}
