@@ -36,6 +36,7 @@
 			<list>
 				<value>cn/jxufe/domain/Role.hbm.xml</value>
 				<value>cn/jxufe/domain/User.hbm.xml</value>
+				<value>cn/jxufe/domain/Book.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -44,14 +45,23 @@
 	<bean id="userAction" class="cn.jxufe.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
+	<bean id="bookAction" class="cn.jxufe.action.BookAction" scope="prototype">
+		<property name="bookService" ref="bookService"></property>
+	</bean>
 	
 	<!-- Service -->
 	<bean id="userService" class="cn.jxufe.service.UserService">
 		<property name="userdao" ref="userDao"></property>
 	</bean>
+	<bean id="bookService" class="cn.jxufe.service.BookService">
+		<property name="bookDao" ref="bookDao"></property>
+	</bean>
 	
 	<!-- Dao -->
 	<bean id="userDao" class="cn.jxufe.dao.UserDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="bookDao" class="cn.jxufe.dao.BookDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	

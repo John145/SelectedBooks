@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-4-5 12:01:00 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="cn.jxufe.domain.Book" table="BOOK">
+        <id name="bid" type="java.lang.Integer">
+            <column name="BID" />
+            <generator class="native" />
+        </id>
+        <property name="picUrl" type="java.lang.String">
+            <column name="PICURL" />
+        </property>
+        <property name="bookName" type="java.lang.String">
+            <column name="BOOKNAME" />
+        </property>
+        <property name="author" type="java.lang.String">
+            <column name="AUTHOR" />
+        </property>
+        <property name="publisher" type="java.lang.String">
+            <column name="PUBLISHER" />
+        </property>
+        <property name="translator" type="java.lang.String">
+            <column name="TRANSLATOR" />
+        </property>
+        <property name="publishYear" type="java.lang.String">
+            <column name="PUBLISHYEAR" />
+        </property>
+        <property name="pages" type="java.lang.Integer">
+            <column name="PAGES" />
+        </property>
+        <property name="price" type="java.lang.Double">
+            <column name="PRICE" />
+        </property>
+        <property name="score" type="java.lang.Double">
+            <column name="SCORE" />
+        </property>
+        <property name="assessNumber" type="java.lang.Integer">
+            <column name="ASSESSNUMBER" />
+        </property>
+        <property name="readUrl" type="java.lang.String">
+            <column name="READURL" />
+        </property>
+        <property name="contentIntroduce" type="java.lang.String">
+            <column name="CONTENTINTRODUCE" />
+        </property>
+        <property name="authorIntroduce" type="java.lang.String">
+            <column name="AUTHORINTRODUCE" />
+        </property>
+        <property name="tags" type="java.lang.String">
+            <column name="TAGS" />
+        </property>
+    </class>
+</hibernate-mapping>
