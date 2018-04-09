@@ -6,12 +6,19 @@
 <struts>
 
     <package name="aaa" extends="struts-default" namespace="/">
+    	<!-- 注册拦截器 -->
     	<interceptors>
-    		<interceptor name="hello" class="cn.jxufe.interceptor.LoginInterceptor">
-    		
-    		</interceptor>
+    		<interceptor name="myLoginInterceptor" class="loginInterceptor"/>
+    		<interceptor-stack name="permissionStack">
+    			<interceptor-ref name="defaultStack"/>
+    			<interceptor-ref name="myLoginInterceptor"/>
+    		</interceptor-stack>
     	</interceptors>
-    
+    	<global-results>
+    		<result name="input">/index.jsp</result>
+    	</global-results>
+    	
+    	<!-- userAction -->
     	<action name="user_*" class="userAction" method="{1}">
     		<result name="input">/index.jsp</result>
     		<result name="success" type="redirectAction">book_findAll?curPage=1</result>
@@ -23,7 +30,10 @@
 				<param name="inputName">inputStream</param>
 			</result>
     	</action>
+    	
+    	<!-- bookAction -->
     	<action name="book_*" class="bookAction" method="{1}">
+    		<interceptor-ref name="permissionStack"></interceptor-ref>
     		<result name="findAll">/homepage.jsp</result>
     	</action>
     </package>

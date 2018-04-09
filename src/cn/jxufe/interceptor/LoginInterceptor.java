@@ -11,11 +11,11 @@ public class LoginInterceptor extends AbstractInterceptor {
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		System.out.println("µÇÂ½À¹½ØÆ÷");
-		User existUser = (User) ActionContext.getContext().getSession().get("existUser");
-		if(existUser != null) {
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		if(curUser != null) {
 			return invocation.invoke();
 		}else {
-			return "error";
+			return "input";
 		}
 	}
 
