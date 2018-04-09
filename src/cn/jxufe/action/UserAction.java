@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -34,6 +36,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			ActionContext.getContext().getSession().put("curUser", curUser);
 			return SUCCESS;
 		}
+	}
+	public String logout() {
+		ServletActionContext.getRequest().getSession().invalidate();
+		return "logout";
 	}
 	public String register() {
 		System.out.println("×¢²áÓÃ»§£º"+user);

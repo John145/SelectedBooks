@@ -11,7 +11,7 @@
 	<h1>登陆页面</h1>
 	<a href="${pageContext.request.contextPath }/register.jsp">没有账号?现在注册</a>
 	<h3 style='color:red;'><s:actionerror /></h3>
-	<s:form action="user_login" method="post" theme="simple">
+	<s:form action="user_login" method="post" theme="simple" namespace="/">
 		账号：<s:textfield name="username"></s:textfield><br/>
 		密码：<s:textfield name="password" type="password"></s:textfield><br/>
 		<input type="submit" value="登陆"/>
