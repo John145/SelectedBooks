@@ -29,6 +29,8 @@
 </head>
 <body>
 	您好：<s:property value="#session.curUser.nickname"/><a href="user_logout">注销</a>
+	-<s:property value="#session.curUser.role.rname"/>
+	<s:debug></s:debug>
 	<div id="container">
 		<div id="outer">
 			<s:iterator value="list" var="b">
