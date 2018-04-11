@@ -31,7 +31,7 @@
 <body>
 	<h1>注册页面</h1>
 	<h3 style='color:red;'><s:actionerror /></h3>
-	<s:form action="user_register" method="post" theme="simple">
+	<s:form action="user_register" method="post" theme="simple" namespace="/">
 		账号：<s:textfield name="username" id="username"></s:textfield><br />
 		密码：<s:textfield name="password" type="password"></s:textfield><br />
 		昵称：<s:textfield name="nickname"></s:textfield><br />

@@ -57,7 +57,7 @@
 					<a href="${pageContext.request.contextPath }/book_findAll?curPage=1">[首页]</a>
 					<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage-1" />">[上一页]</a>
 				</s:if>
-				<s:if test="curPage != totalPage">
+				<s:if test="curPage != totalPage && totalPage != 0">
 					<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage+1" />">[下一页]</a>
 					<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="totalPage" />">[尾页]</a>
 				</s:if>
