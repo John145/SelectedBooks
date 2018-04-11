@@ -32,7 +32,7 @@
 	<form action="book_search" method="get">
 	
 	
-	您好：<s:property value="#session.curUser.nickname"/><a href="user_logout">注销</a>
+	您好：<s:property value="#session.curUser.nickname"/><a href="${pageContext.request.contextPath }/user/user_logout">注销</a>
 	-<s:property value="#session.curUser.role.rname"/> 
 	<s:debug></s:debug>
 	<input name="curPage" type="hidden" value="1">
