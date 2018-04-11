@@ -36,7 +36,7 @@
     		<interceptor-ref name="permissionStack"></interceptor-ref>
     		<result name="findAll">/user/homepage.jsp</result>
     		<result name="search">/user/search.jsp</result>
-    		
+    		<result name="detail">/user/detail.jsp</result>
     	</action>
     </package>
 	

@@ -41,4 +41,13 @@ public class BookDao extends HibernateDaoSupport {
 		return list;
 	}
 
+	public Book findById(int bid) {
+		String hql = "from Book where bid=?";
+		List<Book> list = this.getHibernateTemplate().find(hql,bid);
+		if(list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
 }
