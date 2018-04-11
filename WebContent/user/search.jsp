@@ -10,7 +10,7 @@
 	.book{
 		width: 120px;
 		height: 200px;
-		float: left;
+ 		float: left; 
 		overflow: hidden;
 		margin-left: 20px;
 		margin-top: 20px;
