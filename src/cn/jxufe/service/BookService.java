@@ -40,7 +40,6 @@ public class BookService {
 		pageBean.setPageSize(pageSize);
 		//总记录数
 		int totalCount = bookDao.findCountByKeyword(keyword);
-		System.out.println(totalCount);
 		pageBean.setTotalCount(totalCount);
 		//总页数
 		int num =(int)Math.ceil((double)totalCount / pageSize);
@@ -51,7 +50,7 @@ public class BookService {
 		pageBean.setList(books);//blm000222
 		return pageBean;
 	}
-	public PageBean<Book> delByKeyword(Integer bid, Integer curPage) {
+	public PageBean<Book> delByKeyword(int bid, Integer curPage) {
 		// TODO Auto-generated method stub
 		PageBean<Book> pageBean = new PageBean<Book>();
 		//当前页数
@@ -72,5 +71,9 @@ public class BookService {
 		List<Book> books = bookDao.findByPage(begin,pageSize);
 		pageBean.setList(books);//blm000222
 		return pageBean;
+	}
+	public Book findById(int bid) {
+		Book book = bookDao.findById(bid);
+		return book;
 	}
 }

@@ -49,7 +49,6 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		return keyword;
 	}
 	public String search() {
-		System.out.println(keyword);
 		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		return "search";
@@ -62,5 +61,11 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		ActionContext.getContext().getValueStack().push(pageBean);
 		System.out.println("delete()");
 		return "delete";
+	}
+	public String detail() {
+		int bid = book.getBid();
+		Book book = bookService.findById(bid);
+		ActionContext.getContext().getValueStack().push(book);
+		return "detail";
 	}
 }

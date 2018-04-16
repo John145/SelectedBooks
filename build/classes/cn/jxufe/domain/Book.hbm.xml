@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-4-5 12:01:00 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-4-13 22:05:50 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="cn.jxufe.domain.Book" table="BOOK">
         <id name="bid" type="java.lang.Integer">
@@ -26,26 +26,26 @@
         <property name="publishYear" type="java.lang.String">
             <column name="PUBLISHYEAR" />
         </property>
-        <property name="pages" type="java.lang.Integer">
+        <property name="pages" type="java.lang.String">
             <column name="PAGES" />
         </property>
-        <property name="price" type="java.lang.Double">
+        <property name="price" type="java.lang.String">
             <column name="PRICE" />
         </property>
-        <property name="score" type="java.lang.Double">
+        <property name="score" type="java.lang.String">
             <column name="SCORE" />
         </property>
-        <property name="assessNumber" type="java.lang.Integer">
+        <property name="assessNumber" type="java.lang.String">
             <column name="ASSESSNUMBER" />
         </property>
         <property name="readUrl" type="java.lang.String">
             <column name="READURL" />
         </property>
         <property name="contentIntroduce" type="java.lang.String">
-            <column name="CONTENTINTRODUCE" />
+            <column name="CONTENTINTRODUCE" length="1024" />
         </property>
         <property name="authorIntroduce" type="java.lang.String">
-            <column name="AUTHORINTRODUCE" />
+            <column name="AUTHORINTRODUCE" length="1024" />
         </property>
         <property name="tags" type="java.lang.String">
             <column name="TAGS" />

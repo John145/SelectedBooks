@@ -48,6 +48,7 @@
 	<bean id="bookAction" class="cn.jxufe.action.BookAction" scope="prototype">
 		<property name="bookService" ref="bookService"></property>
 	</bean>
+	<bean id="checkCodeAction" class="cn.jxufe.action.CheckCodeAction" scope="prototype"></bean>
 	
 	<!-- Service -->
 	<bean id="userService" class="cn.jxufe.service.UserService">

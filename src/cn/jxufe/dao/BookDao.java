@@ -42,17 +42,16 @@ public class BookDao extends HibernateDaoSupport {
 		return list;
 	}
 
-	public void delCountByKeyword(Integer bid) {
+	public void delCountByKeyword(int bid) {
 		// TODO Auto-generated method stub
 		String hql = "delete from Book where bid =" +bid+"";
 		System.out.println(hql);
-		Book book = findByid(bid);
+		Book book = findById(bid);
 		this.getHibernateTemplate().delete(book);
 		System.out.println("É¾³ý³É¹¦");
 	}
 
-	public Book findByid(int bid) {
-		// TODO Auto-generated method stub
+	public Book findById(int bid) {
 		String hql = "from Book where bid=?";
 		List<Book> list = this.getHibernateTemplate().find(hql,bid);
 		if(list.size() > 0) {
@@ -60,5 +59,4 @@ public class BookDao extends HibernateDaoSupport {
 		}
 		return null;
 	}
-	
 }

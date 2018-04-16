@@ -8,46 +8,36 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.book{
-		width: 120px;
-		height: 200px;
- 		float: left; 
-		overflow: hidden;
-		margin-left: 20px;
-		margin-top: 20px;
+		border: 1px solid black;
+		height: 180px;
+	}
+	.book div{
+		float: left;
 	}
 	.book img{
 		width: 120px;
 		height: 180px;
+		float: left;
 	}
 	#outer{
-		width: 720px;
-		height: 460px;
+		width: 80%;
 		background: #CCC;
 		margin: 0 auto;
 	}
 </style>
 </head>
 <body>
-
-	<s:form action="book_search" method="get" theme="simple">
-	
-	
-	您好：<s:property value="#session.curUser.nickname"/><a href="user_logout">注销</a>
-	-<s:property value="#session.curUser.role.rname"/> 
-	<s:debug></s:debug>
-	<input name="curPage" type="hidden" value="1">
-	搜索： 
-	<s:textfield name="keyword"></s:textfield>
-		<input type="submit" value="提交">
-	
-	</s:form>
+	<s:include value="top.jsp"></s:include>
 	
 	<div id="container">
 		<div id="outer">
 			<s:iterator value="list" var="b">
 				<div class="book">
 					<img alt='' src="<s:property value="#b.picUrl"/>"/>
-					<a href="#"><s:property value="#b.bookName"/></a>
+					<div>
+						<a href="book_detail?bid=<s:property value="#b.bid" />"><s:property value="#b.bookName"/></a>
+						<div></div>
+					</div>
 				</div>
 			</s:iterator>
 		</div>

@@ -29,23 +29,14 @@
 </head>
 <body>
 
-	<form action="book_search" method="get">
+	<s:include value="top.jsp"></s:include>
 	
-	
-	您好：<s:property value="#session.curUser.nickname"/><a href="${pageContext.request.contextPath }/user/user_logout">注销</a>
-	-<s:property value="#session.curUser.role.rname"/> 
-	<s:debug></s:debug>
-	<input name="curPage" type="hidden" value="1">
-	搜索：<input type="text" name="keyword"> 
-		<input type="submit" value="提交">
-	
-	</form>
 	<div id="container">
 		<div id="outer">
 			<s:iterator value="list" var="b">
 				<div class="book">
 					<img alt='' src="<s:property value="#b.picUrl"/>"/>
-					<a href="#"><s:property value="#b.bookName"/></a>
+					<a href="book_detail?bid=<s:property value="#b.bid"/>"><s:property value="#b.bookName"/></a>
 				</div>
 			</s:iterator>
 		</div>
