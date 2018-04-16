@@ -6,7 +6,9 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import cn.jxufe.domain.Book;
 import cn.jxufe.domain.PageBean;
+import cn.jxufe.domain.User;
 import cn.jxufe.service.BookService;
+
 
 public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	private static final long serialVersionUID = 1L;
@@ -28,8 +30,16 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	public String findAll() {
 		PageBean<Book> pageBean = bookService.findByPage(curPage);
 		ActionContext.getContext().getValueStack().push(pageBean);
-		return "findAll";
+		User user = (User) ActionContext.getContext().getSession().get("curUser");
+		if(user.getRole().getRname().equals("×¢²áÓÃ»§")) {
+			return "findAll";
+		}else {
+			return "AdminfindAll";
+		}
 	}
+	
+	
+	
 	private String keyword;
 	
 	public void setKeyword(String keyword) {
@@ -45,4 +55,12 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		return "search";
 	}
 	
+
+	public String delete() {
+		System.out.println(book.getBid());
+		PageBean<Book> pageBean = bookService.delByKeyword(book.getBid(),curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		System.out.println("delete()");
+		return "delete";
+	}
 }

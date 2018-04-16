@@ -29,6 +29,8 @@
 				<param name="contentType">text/html</param>
 				<param name="inputName">inputStream</param>
 			</result>
+			<result name="UserAdmin">/user/homepage.jsp</result>
+    		<result name="BookAdmin" type="redirectAction">book_findAll?curPage=1</result>
     	</action>
     	
     	<!-- bookAction -->
@@ -36,8 +38,11 @@
     		<interceptor-ref name="permissionStack"></interceptor-ref>
     		<result name="findAll">/user/homepage.jsp</result>
     		<result name="search">/user/search.jsp</result>
-    		
+    		<result name="AdminfindAll">/admin/homepage.jsp</result>
+    		<result name="delete">/admin/homepage.jsp</result>
     	</action>
+    	
+    	
     </package>
 	
 </struts>

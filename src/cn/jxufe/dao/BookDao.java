@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import cn.jxufe.domain.Book;
+import cn.jxufe.domain.User;
 
 public class BookDao extends HibernateDaoSupport {
 
@@ -41,4 +42,23 @@ public class BookDao extends HibernateDaoSupport {
 		return list;
 	}
 
+	public void delCountByKeyword(Integer bid) {
+		// TODO Auto-generated method stub
+		String hql = "delete from Book where bid =" +bid+"";
+		System.out.println(hql);
+		Book book = findByid(bid);
+		this.getHibernateTemplate().delete(book);
+		System.out.println("É¾³ý³É¹¦");
+	}
+
+	public Book findByid(int bid) {
+		// TODO Auto-generated method stub
+		String hql = "from Book where bid=?";
+		List<Book> list = this.getHibernateTemplate().find(hql,bid);
+		if(list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+	
 }

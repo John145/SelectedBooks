@@ -31,13 +31,21 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	public String login() {
 		System.out.println("请求登陆");
 		User curUser = userService.login(user);
+		
 		if(curUser == null) {
 			this.addActionError("用户名密码错误!");
 			return INPUT;
-		}else {
+		}else if(curUser.getRole().getRname().equals("注册用户")) {
 			ActionContext.getContext().getSession().put("curUser", curUser);
 			return SUCCESS;
+		}else if(curUser.getRole().getRname().equals("书籍管理员")) {
+			ActionContext.getContext().getSession().put("curUser", curUser);
+			return "BookAdmin";
+		}else if(curUser.getRole().getRname().equals("用户管理员")) {
+			ActionContext.getContext().getSession().put("curUser", curUser);
+			return "UserAdmin";
 		}
+		return null;
 	}
 	public String logout() {
 		ServletActionContext.getRequest().getSession().invalidate();
