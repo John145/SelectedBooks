@@ -26,6 +26,9 @@
 			}
 		});
 	});
+	function change(){
+		$('#checkCodeImg').attr("src","${pageContext.request.contextPath }/checkCode?d="+new Date().getTime());
+	}
 </script>
 </head>
 <body>
@@ -38,7 +41,7 @@
 		性别：<s:radio  list="#{'男':'男','女':'女'}" name="sex"></s:radio><br />
 		邮箱：<s:textfield name="email"></s:textfield><br />
 		现居地：<s:textfield name="address"></s:textfield><br />
-		
+		验证码：<s:textfield name="checkCode"></s:textfield><img onclick="change()" id="checkCodeImg" src="${pageContext.request.contextPath }/checkCode" /><br />
 		<input type="submit" value="注册"/>
 	</s:form>
 </body>

@@ -30,6 +30,10 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	
 	public String login() {
 		System.out.println("请求登陆");
+		if(!checkCode.toLowerCase().equals(ActionContext.getContext().getSession().get("checkCode"))) {
+			this.addActionError("验证码错误!");
+			return INPUT;
+		}
 		User curUser = userService.login(user);
 		if(curUser == null) {
 			this.addActionError("用户名密码错误!");
@@ -43,8 +47,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		ServletActionContext.getRequest().getSession().invalidate();
 		return "logout";
 	}
+	private String checkCode;
+	public void setCheckCode(String checkCode) {
+		this.checkCode = checkCode;
+	}
 	public String register() {
 		System.out.println("注册用户："+user);
+		if(!checkCode.toLowerCase().equals(ActionContext.getContext().getSession().get("checkCode"))) {
+			this.addActionError("注册失败（验证码错误）");
+			return "register";
+		}
 		if(user.getUsername().equals("") || !userService.usernameIsvalid(user.getUsername()) ||
 				user.getPassword().equals("")) {
 			this.addActionError("注册失败（用户名和密码输入格式有误）");

@@ -30,6 +30,7 @@
 				<param name="inputName">inputStream</param>
 			</result>
     	</action>
+    	<action name="checkCode" class="checkCodeAction"></action>
     	
     	<!-- bookAction -->
     	<action name="book_*" class="bookAction" method="{1}">

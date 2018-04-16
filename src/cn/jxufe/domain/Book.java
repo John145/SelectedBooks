@@ -8,10 +8,10 @@ public class Book {
 	private String publisher;
 	private String translator;
 	private String publishYear;
-	private Integer pages;
-	private Double price;
-	private Double score;
-	private Integer assessNumber;
+	private String pages;
+	private String price;
+	private String score;
+	private String assessNumber;
 	private String readUrl;
 	private String contentIntroduce;
 	private String authorIntroduce;
@@ -58,28 +58,28 @@ public class Book {
 	public void setPublishYear(String publishYear) {
 		this.publishYear = publishYear;
 	}
-	public Integer getPages() {
+	public String getPages() {
 		return pages;
 	}
-	public void setPages(Integer pages) {
+	public void setPages(String pages) {
 		this.pages = pages;
 	}
-	public Double getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
-	public Double getScore() {
+	public String getScore() {
 		return score;
 	}
-	public void setScore(Double score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
-	public Integer getAssessNumber() {
+	public String getAssessNumber() {
 		return assessNumber;
 	}
-	public void setAssessNumber(Integer assessNumber) {
+	public void setAssessNumber(String assessNumber) {
 		this.assessNumber = assessNumber;
 	}
 	public String getReadUrl() {
