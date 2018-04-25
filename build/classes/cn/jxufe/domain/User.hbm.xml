@@ -27,6 +27,9 @@
         <property name="address" type="java.lang.String">
             <column name="ADDRESS" />
         </property>
+        <property name="interests" type="java.lang.String">
+            <column name="INTERESTS" />
+        </property>
         <many-to-one name="role" class="cn.jxufe.domain.Role" lazy="false">
             <column name="RID" />
         </many-to-one>

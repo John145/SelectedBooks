@@ -11,10 +11,13 @@ public class UserService {
 	public User login(User user) {
 		return userdao.findByUsernameAndPassword(user);
 	}
-	public void register(User user) {
-		userdao.save(user);
+	public User register(User user) {
+		return userdao.save(user);
 	}
 	public boolean usernameIsvalid(String username) {
 		return userdao.findByUsername(username) == null;
+	}
+	public void update(User user) {
+		userdao.update(user);
 	}
 }

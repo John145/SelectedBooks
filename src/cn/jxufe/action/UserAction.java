@@ -27,7 +27,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+	public String chooseInterest() {
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		curUser.setSex(user.getSex());
+		curUser.setInterests(user.getInterests());
+		userService.update(curUser);
+		return "chooseInterest";
+	}
 	public String login() {
 		System.out.println("ÇëÇóµÇÂ½");
 		if(!checkCode.toLowerCase().equals(ActionContext.getContext().getSession().get("checkCode"))) {
@@ -73,7 +79,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		Role role = new Role();
 		role.setRid(1);
 		user.setRole(role);
-		userService.register(user);
+		User curUser = userService.register(user);
+		ActionContext.getContext().getSession().put("curUser", curUser);
 		return "registerSuccess";
 	}
 	private InputStream inputStream;

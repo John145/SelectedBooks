@@ -1,5 +1,6 @@
 package cn.jxufe.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -17,8 +18,9 @@ public class UserDao extends HibernateDaoSupport {
 		return null;
 	}
 
-	public void save(User user) {
-		this.getHibernateTemplate().save(user);
+	public User save(User user) {
+		Serializable s = this.getHibernateTemplate().save(user);
+		return this.getHibernateTemplate().get(User.class, s);
 	}
 
 	public User findByUsername(String username) {
@@ -28,6 +30,13 @@ public class UserDao extends HibernateDaoSupport {
 			return list.get(0);
 		}
 		return null;
+	}
+	/**
+	 * 更新用户
+	 * @param user
+	 */
+	public void update(User user) {
+		this.getHibernateTemplate().update(user);
 	}
 	
 }

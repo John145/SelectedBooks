@@ -8,7 +8,16 @@ public class User {
 	private String nickname;
 	private String email;
 	private String address;
+	private String interests;
 	
+	public String getInterests() {
+		return interests;
+	}
+
+	public void setInterests(String interests) {
+		this.interests = interests;
+	}
+
 	private Role role;
 
 	public Integer getUid() {
@@ -78,7 +87,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", sex=" + sex + ", nickname="
-				+ nickname + ", email=" + email + ", address=" + address + "]";
+				+ nickname + ", email=" + email + ", address=" + address + ", interests=" + interests + "]";
 	}
-	
 }
