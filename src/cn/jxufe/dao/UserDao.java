@@ -38,5 +38,15 @@ public class UserDao extends HibernateDaoSupport {
 	public void update(User user) {
 		this.getHibernateTemplate().update(user);
 	}
-	
+	/**
+	 * 根据UID获取user
+	 */
+	public User get(Integer uid) {
+		String hql = "from User where uid=?";
+		List<User> list = this.getHibernateTemplate().find(hql,uid);
+		if(list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
 }

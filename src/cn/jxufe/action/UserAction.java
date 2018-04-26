@@ -3,6 +3,7 @@ package cn.jxufe.action;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.jxufe.domain.Book;
 import cn.jxufe.domain.Role;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.UserService;
@@ -76,9 +78,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			this.addActionError("注册失败（用户名和密码输入格式有误）");
 			return "register";
 		}
-		Role role = new Role();
-		role.setRid(1);
-		user.setRole(role);
 		User curUser = userService.register(user);
 		ActionContext.getContext().getSession().put("curUser", curUser);
 		return "registerSuccess";
@@ -94,6 +93,32 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			}else {
 				inputStream = new ByteArrayInputStream("0".getBytes("UTF-8"));
 			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "ajax-success";
+	}
+	private Integer bid;
+	public void setBid(Integer bid) {
+		this.bid = bid;
+	}
+	public String addBook() {
+		//添加收藏书籍
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		userService.addBook(curUser.getUid(),bid);
+		try {
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "ajax-success";
+	}
+	public String removeBook() {
+		//删除收藏书籍
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		userService.removeBook(curUser.getUid(),bid);
+		try {
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

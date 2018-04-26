@@ -50,7 +50,9 @@ public class BookDao extends HibernateDaoSupport {
 		this.getHibernateTemplate().delete(book);
 		System.out.println("删除成功");
 	}
-
+	/**
+	 * 通过bid查询book对象
+	 */
 	public Book findById(int bid) {
 		String hql = "from Book where bid=?";
 		List<Book> list = this.getHibernateTemplate().find(hql,bid);
@@ -58,5 +60,8 @@ public class BookDao extends HibernateDaoSupport {
 			return list.get(0);
 		}
 		return null;
+	}
+	public void update(Book book) {
+		this.getHibernateTemplate().update(book);
 	}
 }

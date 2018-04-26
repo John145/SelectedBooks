@@ -50,5 +50,11 @@
         <property name="tags" type="java.lang.String">
             <column name="TAGS" />
         </property>
+        <property name="clickNumber" column="click_number"></property>
+        <!-- 放弃对users的管理 -->
+        <set name="users" table="user_like_book" cascade="save-update">
+			<key column="book_id"></key>
+			<many-to-many class="cn.jxufe.domain.User" column="user_id"></many-to-many>
+		</set>
     </class>
 </hibernate-mapping>

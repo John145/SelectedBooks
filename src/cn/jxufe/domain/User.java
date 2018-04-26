@@ -1,5 +1,8 @@
 package cn.jxufe.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
 	private Integer uid;
 	private String username;
@@ -9,7 +12,16 @@ public class User {
 	private String email;
 	private String address;
 	private String interests;
+	private Set<Book> books = new HashSet<Book>(0);
 	
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+
 	public String getInterests() {
 		return interests;
 	}

@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.jxufe.domain.Book;
+import cn.jxufe.domain.BookAndLike;
 import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.BookService;
@@ -64,8 +65,10 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	}
 	public String detail() {
 		int bid = book.getBid();
-		Book book = bookService.findById(bid);
-		ActionContext.getContext().getValueStack().push(book);
+		User curUser = (User)ActionContext.getContext().getSession().get("curUser");
+		Integer uid = curUser.getUid(); 
+		BookAndLike bookAndLike = bookService.findById(bid,uid);
+		ActionContext.getContext().getValueStack().push(bookAndLike);
 		return "detail";
 	}
 }
