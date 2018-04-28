@@ -1,5 +1,8 @@
 package cn.jxufe.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Book {
 	private Integer bid;
 	private String picUrl;
@@ -16,6 +19,22 @@ public class Book {
 	private String contentIntroduce;
 	private String authorIntroduce;
 	private String tags;
+	private Integer clickNumber;
+	
+	public Integer getClickNumber() {
+		return clickNumber;
+	}
+	public void setClickNumber(Integer clickNumber) {
+		this.clickNumber = clickNumber;
+	}
+	private Set<User> users = new HashSet<User>(0);
+	
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 	public Integer getBid() {
 		return bid;
 	}
@@ -112,7 +131,7 @@ public class Book {
 				+ ", publisher=" + publisher + ", translator=" + translator + ", publishYear=" + publishYear
 				+ ", pages=" + pages + ", price=" + price + ", score=" + score + ", assessNumber=" + assessNumber
 				+ ", readUrl=" + readUrl + ", contentIntroduce=" + contentIntroduce + ", authorIntroduce="
-				+ authorIntroduce + ", tags=" + tags + "]";
+				+ authorIntroduce + ", tags=" + tags + ", clickNumber=" + clickNumber + ", users=" + users + "]";
 	}
-	
+
 }

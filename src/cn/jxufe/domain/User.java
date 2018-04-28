@@ -1,5 +1,8 @@
 package cn.jxufe.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
 	private Integer uid;
 	private String username;
@@ -8,7 +11,25 @@ public class User {
 	private String nickname;
 	private String email;
 	private String address;
+	private String interests;
+	private Set<Book> books = new HashSet<Book>(0);
 	
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+
+	public String getInterests() {
+		return interests;
+	}
+
+	public void setInterests(String interests) {
+		this.interests = interests;
+	}
+
 	private Role role;
 
 	public Integer getUid() {
@@ -78,7 +99,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", sex=" + sex + ", nickname="
-				+ nickname + ", email=" + email + ", address=" + address + "]";
+				+ nickname + ", email=" + email + ", address=" + address + ", interests=" + interests + "]";
 	}
-	
 }

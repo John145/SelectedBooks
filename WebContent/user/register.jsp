@@ -1,48 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#username").change(function(){
-			var value = $(this).val();
-			var $this = $(this);
-			if(value != ""){
-				$this.nextAll("span").remove();
-				$.post("user_validateUsername",{"username":value},function(result){
-					if(result == "1"){
-						$this.after("<span style='color:green;'>账号可用</span>");
-					}else if(result == "0"){
-						$this.after("<span style='color:red;'>账号不可用</span>");
-					}
-				});
-			}else{
-				$this.after("<span style='color:red;'>账号不可以为空</span>");
+		<meta charset="utf-8">
+		<title>注册界面</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../css/reset.css" />
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+	</head>
+	<body>
+		<div class="wrap login_wrap">
+			<div class="content">
+				
+				<div class="logo"></div>
+				
+				<div class="login_box">	
+					
+					<div class="login_form">
+						<div class="login_title">
+							注册
+						</div>
+						<form action="user_register" method="post" id="from">
+							<h3 style='color:red;text-align:center;'><s:actionerror /></h3>
+							<div class="form_text_ipt">
+								<s:textfield name="username" id="username" placeholder="账号"></s:textfield>
+							</div>
+							<div class="ececk_warning"><span>账号不能为空</span></div>
+							<div class="form_text_ipt">
+								<s:textfield name="nickname" placeholder="昵称"></s:textfield>
+							</div>
+							
+							<div class="ececk_warning"><span>昵称不能为空</span></div>
+							<div class="form_text_ipt">
+								<input type="password" placeholder="密码" value='<s:property value="password"/>'>
+							</div>
+							<div class="ececk_warning"><span>密码不能为空</span></div>
+							<div class="form_text_ipt">
+								<s:textfield name="password" type="password" placeholder="重复密码"></s:textfield>
+							</div>
+							<div class="ececk_warning"><span>重复密码不能为空</span></div>
+							<div class="form_text_yz">
+								<s:textfield name="checkCode" placeholder="验证码"></s:textfield>
+								<img class="yzm" onclick="change()" id="checkCodeImg" src="${pageContext.request.contextPath }/checkCode" />
+							</div>
+							<div class="ececk_warning"><span>验证码不能为空</span></div>
+							<br />
+							
+							<div class="form_btn">
+								<button type="button" onclick="validate()">注册</button>
+							</div>
+							<div class="form_reg_btn">
+								<span>已有帐号？</span><a href="${pageContext.request.contextPath }/index.jsp">马上登录</a>
+							</div>
+						</form>
+						<div class="bottom">
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../scripts/jquery.min.js" ></script>
+		<script type="text/javascript" src="../scripts/common.js" ></script>
+		<script type="text/javascript">
+			function change(){
+				$('#checkCodeImg').attr("src","${pageContext.request.contextPath }/checkCode?d="+new Date().getTime());
 			}
-		});
-	});
-	function change(){
-		$('#checkCodeImg').attr("src","${pageContext.request.contextPath }/checkCode?d="+new Date().getTime());
-	}
-</script>
-</head>
-<body>
-	<h1>注册页面</h1>
-	<h3 style='color:red;'><s:actionerror /></h3>
-	<s:form action="user_register" method="post" theme="simple" namespace="/">
-		账号：<s:textfield name="username" id="username"></s:textfield><br />
-		密码：<s:textfield name="password" type="password"></s:textfield><br />
-		昵称：<s:textfield name="nickname"></s:textfield><br />
-		性别：<s:radio  list="#{'男':'男','女':'女'}" name="sex"></s:radio><br />
-		邮箱：<s:textfield name="email"></s:textfield><br />
-		现居地：<s:textfield name="address"></s:textfield><br />
-		验证码：<s:textfield name="checkCode"></s:textfield><img onclick="change()" id="checkCodeImg" src="${pageContext.request.contextPath }/checkCode" /><br />
-		<input type="submit" value="注册"/>
-	</s:form>
-</body>
+		</script>
+		<div style="text-align:center;">
+</div>
+	</body>
 </html>
