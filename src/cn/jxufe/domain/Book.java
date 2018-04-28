@@ -106,5 +106,13 @@ public class Book {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
+	@Override
+	public String toString() {
+		return "Book [bid=" + bid + ", picUrl=" + picUrl + ", bookName=" + bookName + ", author=" + author
+				+ ", publisher=" + publisher + ", translator=" + translator + ", publishYear=" + publishYear
+				+ ", pages=" + pages + ", price=" + price + ", score=" + score + ", assessNumber=" + assessNumber
+				+ ", readUrl=" + readUrl + ", contentIntroduce=" + contentIntroduce + ", authorIntroduce="
+				+ authorIntroduce + ", tags=" + tags + "]";
+	}
 	
 }

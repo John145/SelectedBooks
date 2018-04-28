@@ -48,7 +48,7 @@ public class BookDao extends HibernateDaoSupport {
 		System.out.println(hql);
 		Book book = findById(bid);
 		this.getHibernateTemplate().delete(book);
-		System.out.println("É¾³ý³É¹¦");
+		System.out.println("É¾ï¿½ï¿½ï¿½É¹ï¿½");
 	}
 
 	public Book findById(int bid) {
@@ -58,5 +58,12 @@ public class BookDao extends HibernateDaoSupport {
 			return list.get(0);
 		}
 		return null;
+	}
+	public void update(Book book) {
+		this.getHibernateTemplate().update(book);
+	}
+
+	public void add(Book book) {
+		this.getHibernateTemplate().save(book);
 	}
 }

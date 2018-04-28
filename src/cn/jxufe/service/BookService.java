@@ -14,18 +14,18 @@ public class BookService {
 	public PageBean<Book> findByPage(Integer curPage) {
 		PageBean<Book> pageBean = new PageBean<Book>();
 		
-		//µ±Ç°Ò³Êý
+		//ï¿½ï¿½Ç°Ò³ï¿½ï¿½
 		pageBean.setCurPage(curPage);
-		//Ã¿Ò³ÏÔÊ¾¶àÉÙÌõ¼ÇÂ¼
+		//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 		int pageSize = 10;
 		pageBean.setPageSize(pageSize);
-		//×Ü¼ÇÂ¼Êý
+		//ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
 		int totalCount = bookDao.findCount();
 		pageBean.setTotalCount(totalCount);
-		//×ÜÒ³Êý
+		//ï¿½ï¿½Ò³ï¿½ï¿½
 		int num =(int)Math.ceil((double)totalCount / pageSize);
 		pageBean.setTotalPage(num);
-		//Ã¿Ò³ÏÔÊ¾µÄÊý¾Ý
+		//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int begin = (curPage - 1) * pageSize;
 		List<Book> books = bookDao.findByPage(begin,pageSize);
 		pageBean.setList(books);//blm000222
@@ -33,18 +33,18 @@ public class BookService {
 	}
 	public PageBean<Book> findByKeyword(String keyword ,Integer curPage) {
 		PageBean<Book> pageBean = new PageBean<Book>();
-		//µ±Ç°Ò³Êý
+		//ï¿½ï¿½Ç°Ò³ï¿½ï¿½
 		pageBean.setCurPage(curPage);
-		//Ã¿Ò³ÏÔÊ¾¶àÉÙÌõ¼ÇÂ¼
+		//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 		int pageSize = 10;
 		pageBean.setPageSize(pageSize);
-		//×Ü¼ÇÂ¼Êý
+		//ï¿½Ü¼ï¿½Â¼ï¿½ï¿½
 		int totalCount = bookDao.findCountByKeyword(keyword);
 		pageBean.setTotalCount(totalCount);
-		//×ÜÒ³Êý
+		//ï¿½ï¿½Ò³ï¿½ï¿½
 		int num =(int)Math.ceil((double)totalCount / pageSize);
 		pageBean.setTotalPage(num);
-		//Ã¿Ò³ÏÔÊ¾µÄÊý¾Ý
+		//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int begin = (curPage - 1) * pageSize;
 		List<Book> books = bookDao.findByPageAndKeyword(begin,pageSize,keyword);
 		pageBean.setList(books);//blm000222
@@ -53,20 +53,20 @@ public class BookService {
 	public PageBean<Book> delByKeyword(int bid, Integer curPage) {
 		// TODO Auto-generated method stub
 		PageBean<Book> pageBean = new PageBean<Book>();
-		//µ±Ç°Ò³Êý
+		//ï¿½ï¿½Ç°Ò³ï¿½ï¿½
 		pageBean.setCurPage(curPage);
-		//Ã¿Ò³ÏÔÊ¾¶àÉÙÌõ¼ÇÂ¼
+		//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
 		int pageSize = 10;
 		pageBean.setPageSize(pageSize);
 		
-		//É¾³ý²Ù×÷
+		//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bookDao.delCountByKeyword(bid);
 		
 		int totalCount = bookDao.findCount();
-		//×ÜÒ³Êý
+		//ï¿½ï¿½Ò³ï¿½ï¿½
 		int num =(int)Math.ceil((double)totalCount / pageSize);
 		pageBean.setTotalPage(num);
-		//Ã¿Ò³ÏÔÊ¾µÄÊý¾Ý
+		//Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int begin = (curPage - 1) * pageSize;
 		List<Book> books = bookDao.findByPage(begin,pageSize);
 		pageBean.setList(books);//blm000222
@@ -75,5 +75,12 @@ public class BookService {
 	public Book findById(int bid) {
 		Book book = bookDao.findById(bid);
 		return book;
+	}
+	public void update(Book book) {
+		bookDao.update(book);
+	}
+	public void add(Book book) {
+		// TODO Auto-generated method stub
+		bookDao.add(book);
 	}
 }
