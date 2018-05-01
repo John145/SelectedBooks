@@ -131,7 +131,7 @@ public class Book {
 				+ ", publisher=" + publisher + ", translator=" + translator + ", publishYear=" + publishYear
 				+ ", pages=" + pages + ", price=" + price + ", score=" + score + ", assessNumber=" + assessNumber
 				+ ", readUrl=" + readUrl + ", contentIntroduce=" + contentIntroduce + ", authorIntroduce="
-				+ authorIntroduce + ", tags=" + tags + ", clickNumber=" + clickNumber + "]";
+				+ authorIntroduce + ", tags=" + tags + ", clickNumber=" + clickNumber + ", users=" + users + "]";
 	}
-	
+
 }

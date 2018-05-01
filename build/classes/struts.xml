@@ -46,6 +46,11 @@
     		<result name="AdminfindAll">/admin/homepage.jsp</result>
     		<result name="delete">/admin/homepage.jsp</result>
     		<result name="detail">/user/detail.jsp</result>
+    		<result name="AdminUpdate">/admin/update.jsp</result>
+    		<result name="update">/admin/update.jsp</result>
+    		<result name="Adminadd">/admin/add.jsp</result>
+    		<result name="add">/admin/addsuccess.jsp</result>
+    		<result name="AdminSearch">/admin/search.jsp</result>
     	</action>
     	<action name="chatRoomMsg_*" class="chatRoomMsgAction" method="{1}">
     		<interceptor-ref name="permissionStack"></interceptor-ref>

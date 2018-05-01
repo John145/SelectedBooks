@@ -11,38 +11,38 @@
 			margin: auto;
 		}
 		#top{
-			width: 1000px;
-			height: 80px;
+			width: 1260px;
+			height: 60px;
+			background: rgb(8,162,186);
 		}
 		#logo{
-			width: 700px;
-			height: 80px;
+			width: 900px;
+			height: 60px;
 			float: left;
-			background: orange;
 		}
 		#operation{
 			width: 300px;
-			height: 80px;
+			height: 60px;
 			float: left;
-			background: white;
+
 		}		
 		#Username{
 			width:98px;
-			height:48px;
+			height:28px;
 			float: left; 
 			border: 1px solid black; 
 			padding-top: 30px;
 		}
 		#refresh{
-				width:98px;
-			height:48px;
+			width:98px;
+			height:28px;
 			float: left; 
 			border: 1px solid black; 
 			padding-top: 30px;
 		}
 		#logout{
 			width:98px;
-			height:48px;
+			height:28px;
 			float: left; 
 			border: 1px solid black; 
 			padding-top: 30px;
@@ -51,7 +51,6 @@
 			padding-top:20px;
 			font-size: 20px;
 			font-style: italic;
-			color: black;
 			padding-left: 40px;
 		}
 	</style>
@@ -60,7 +59,7 @@
 	<div id="top">
 	
 		<div id="logo">	
-			<p>书籍后台管理系统</p>
+			<p style="color: white;">书籍后台管理系统</p>
 		</div>
 		<div id="operation">
 			<div id="Username">

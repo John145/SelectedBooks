@@ -47,7 +47,7 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		PageBean<Book> pageBean = bookService.findByPage(curPage);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		User user = (User) ActionContext.getContext().getSession().get("curUser");
-		if(user.getRole().getRname().equals("ע���û�")) {
+		if(user.getRole().getRname().equals("注册用户")){
 			return "findAll";
 		}else {
 			return "AdminfindAll";
@@ -67,7 +67,12 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	public String search() {
 		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage);
 		ActionContext.getContext().getValueStack().push(pageBean);
-		return "search";
+		User user = (User) ActionContext.getContext().getSession().get("curUser");
+		if(user.getRole().getRname().equals("注册用户")){
+			return "search";
+		}else {
+			return "AdminSearch";
+		}
 	}
 	
 
@@ -85,5 +90,29 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		BookAndLike bookAndLike = bookService.findById(bid,uid);
 		ActionContext.getContext().getValueStack().push(bookAndLike);
 		return "detail";
+	}
+	public String AdminUpdate() {
+		int bid = book.getBid();
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		BookAndLike bookAndLike = bookService.findById(bid,curUser.getUid());
+		Book book = bookAndLike.getBook();
+		ActionContext.getContext().getValueStack().push(book);
+		return "AdminUpdate";
+	}
+	public String update() {
+		System.out.println("bookActionupdate");
+		System.out.println(book);
+		bookService.update(book);
+		return "update";
+	}
+	public String Adminadd() {
+		return "Adminadd";
+	}
+	public String add() {
+		bookService.add(book);
+		return "add";
+	}
+	public String AdminSearch() {
+		return "AdminSearch";
 	}
 }
