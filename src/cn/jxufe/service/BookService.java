@@ -1,5 +1,6 @@
 package cn.jxufe.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import cn.jxufe.dao.UserDao;
 import cn.jxufe.domain.Book;
 import cn.jxufe.domain.BookAndLike;
 import cn.jxufe.domain.PageBean;
+import cn.jxufe.domain.SelectedBooks;
 import cn.jxufe.domain.User;
 
 public class BookService {
@@ -101,5 +103,27 @@ public class BookService {
 		}
 		bookAndLike.setIsLike(isLike);
 		return bookAndLike;
+	}
+	/**
+	 * 根据用户的兴趣推荐相应的书籍
+	 * @param uid
+	 * @return
+	 */
+	public SelectedBooks selected(Integer uid) {
+		SelectedBooks selectedBooks = new SelectedBooks();
+		selectedBooks.setBooks(new ArrayList<Book>());
+		//1、获取用户的兴趣爱好
+		User user = userDao.get(uid);
+		String[] interests = user.getInterests().split("#");
+		//2、遍历interests，查找相应的两本书籍
+		for(String interest : interests) {
+			List<Book> books = bookDao.findByType(interest);
+			selectedBooks.getBooks().add(books.get(0));
+			selectedBooks.getBooks().add(books.get(1));
+		}
+		//3、获取所有图书的排行榜前十
+		List<Book> phb = bookDao.findByClickNumber();
+		selectedBooks.setPhb(phb.subList(0, 10));
+		return selectedBooks;
 	}
 }

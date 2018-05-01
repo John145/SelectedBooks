@@ -37,6 +37,7 @@
 				<value>cn/jxufe/domain/Role.hbm.xml</value>
 				<value>cn/jxufe/domain/User.hbm.xml</value>
 				<value>cn/jxufe/domain/Book.hbm.xml</value>
+				<value>cn/jxufe/domain/ChatRoomMsg.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -49,6 +50,9 @@
 		<property name="bookService" ref="bookService"></property>
 	</bean>
 	<bean id="checkCodeAction" class="cn.jxufe.action.CheckCodeAction" scope="prototype"></bean>
+	<bean id="chatRoomMsgAction" class="cn.jxufe.action.ChatRoomMsgAction">
+		<property name="chatRoomMsgService" ref="chatRoomMsgService"></property>
+	</bean>
 	
 	<!-- Service -->
 	<bean id="userService" class="cn.jxufe.service.UserService">
@@ -60,6 +64,9 @@
 		<property name="bookDao" ref="bookDao"></property>
 		<property name="userDao" ref="userDao"></property>
 	</bean>
+	<bean id="chatRoomMsgService" class="cn.jxufe.service.ChatRoomMsgService">
+		<property name="chatRoomMsgDao" ref="chatRoomMsgDao"></property>
+	</bean>
 	
 	<!-- Dao -->
 	<bean id="userDao" class="cn.jxufe.dao.UserDao">
@@ -69,6 +76,9 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="roleDao" class="cn.jxufe.dao.RoleDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="chatRoomMsgDao" class="cn.jxufe.dao.ChatRoomMsgDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	

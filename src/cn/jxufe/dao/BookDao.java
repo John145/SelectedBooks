@@ -64,4 +64,20 @@ public class BookDao extends HibernateDaoSupport {
 	public void update(Book book) {
 		this.getHibernateTemplate().update(book);
 	}
+	/**
+	 * 通过类型查找相应的书籍，然后对点击量进行降序排序
+	 * @param interest
+	 * @return
+	 */
+	public List<Book> findByType(String interest) {
+		String hql = "from Book where tags like ? order by clickNumber desc";
+		List<Book> list = this.getHibernateTemplate().find(hql,"%"+interest+"%");
+		return list;
+	}
+
+	public List<Book> findByClickNumber() {
+		String hql = "from Book order by clickNumber desc";
+		List<Book> list = this.getHibernateTemplate().find(hql);
+		return list;
+	}
 }

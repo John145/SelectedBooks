@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.jxufe.domain.ChatRoomMsg" table="chatRoomMsg">
+		<id name="cid" column="cid">
+            <generator class="native" />
+        </id>
+        <property name="headPic" column="head_pic"></property>
+        <property name="nickName" column="nick_name"></property>
+        <property name="time" column="time"></property>
+        <property name="content" column="content"></property>
+	</class>
+</hibernate-mapping>

@@ -1,11 +1,16 @@
 package cn.jxufe.action;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Set;
+import java.util.Date;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -13,8 +18,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-import cn.jxufe.domain.Book;
-import cn.jxufe.domain.Role;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.UserService;
 
@@ -28,6 +31,71 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	private UserService userService;
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	/**
+	 * 上传文件
+	 * @return
+	 */
+	private File file;
+	private String fileFileName;
+	private String fileContentType;
+	
+	public void setFile(File file) {
+		this.file = file;
+	}
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+	public void setFileContentType(String fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+	public String upload() {
+//		System.out.println(file+fileFileName+fileContentType);
+		ServletContext servletContext = ServletActionContext.getServletContext();
+        //如果没有文件夹进行一个创建
+        File test = new File(servletContext.getRealPath("/files"));
+        if(!test.exists()) file.mkdirs();
+        //对文件进行保存操作
+        try {
+        	//随机生成一个文件名
+        	long random = new Date().getTime();
+			FileOutputStream out = new FileOutputStream(servletContext.getRealPath("/files/")+random+fileFileName);
+			FileInputStream in = new FileInputStream(file);
+			byte[] buffer = new byte[1024];
+			int len = 0;
+			while((len = in.read(buffer)) != -1) {
+				out.write(buffer,0,len);
+			}
+			in.close();
+			out.close();
+			//返回结果
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+			
+			//更新user
+			User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+			curUser.setHeadPic("files/"+random+fileFileName);
+			userService.update(curUser);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "ajax-success";
+	}
+	/**
+	 * 修改用户信息
+	 * @return
+	 */
+	public String update() {
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		curUser.setSex(user.getSex());
+		curUser.setNickname(user.getNickname());
+		curUser.setEmail(user.getEmail());
+		curUser.setAddress(user.getAddress());
+		curUser.setInterests(user.getInterests());
+		userService.update(curUser);
+		this.addActionMessage("修改成功！！！");
+		return "update";
 	}
 	public String chooseInterest() {
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");

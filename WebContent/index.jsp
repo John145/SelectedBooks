@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <s:if test="null!=#session.curUser">
-	<%response.sendRedirect("book_findAll?curPage=1"); %>
+	<%response.sendRedirect("book_selected"); %>
 </s:if>
 <!DOCTYPE html>
 <html>

@@ -24,6 +24,9 @@ public class UserService {
 		return userdao.findByUsernameAndPassword(user);
 	}
 	public User register(User user) {
+		//设置默认随机头像
+		int random = (int) (Math.random()*9+1);
+		user.setHeadPic("img/headPic/head0"+random+".jpg");
 		//默认设置为注册用户权限
 		Role role = roleDao.get(1);
 		user.setRole(role);

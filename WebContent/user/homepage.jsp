@@ -1,59 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>精选图书</title>
-<style type="text/css">
-	.book{
-		width: 120px;
-		height: 200px;
-		float: left;
-		overflow: hidden;
-		margin-left: 20px;
-		margin-top: 20px;
-	}
-	.book img{
-		width: 120px;
-		height: 180px;
-	}
-	#outer{
-		width: 720px;
-		height: 460px;
-		background: #CCC;
-	}
-</style>
+	<script src="${pageContext.request.contextPath }/scripts/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<style>
+		.avg_show{
+			width: 50%;
+			float: left;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+		.avg_show p{
+			font-size: 0.9em;
+		}
+		@media (min-width: 768px){
+			.avg_show{
+				width: 25%;
+			}
+		}
+		@media (min-width: 992px) {
+			.avg_show{
+				width: 20%;
+			}
+		}
+	</style>
+	<script>
+		//记录当前窗口的区间
+		//0代表<768
+		//1代表768<r<992
+		//2代表992<r<1200
+		//3代表1200<r
+		var range = 0;
+		//由于实现的图书图片不一样大小，所以都按照第一张图片的大小进行调整
+		$(document).ready(function(){
+			var imgs = $(".avg_show img");
+			var firstWidth = $(imgs[0]).css("width");
+			var firstHeight = $(imgs[0]).css("height");
+			console.log(firstWidth,firstHeight);
+			//由于获取到的结果去掉了小数
+			imgs.css("width",firstWidth);
+			imgs.css("height",firstHeight);
+			
+			//设置文字大小超出隐藏
+			$('.avg_show a').css("width",firstWidth);
+			$('.avg_show p').css("width",firstWidth);
+			
+			var preWidth = $(window).width();
+			if(preWidth < 768){
+				range = 0;
+			}else if(preWidth < 992){
+				range = 1;
+			}else if(preWidth < 1200){
+				range = 2;
+			}else{
+				range = 3;
+			}
+		});
+		$(window).resize(function(){
+			var tmpWidth = $(window).width();
+			var nowRange = 0;
+			if(tmpWidth < 768){
+				nowRange = 0;
+			}else if(tmpWidth < 992){
+				nowRange = 1;
+			}else if(tmpWidth < 1200){
+				nowRange = 2;
+			}else{
+				nowRange = 3;
+			}
+			if(range != nowRange){
+				location.reload();
+			}
+		});
+	</script>
 </head>
 <body>
-
 	<s:include value="top.jsp"></s:include>
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<div id="outer">
-					<s:iterator value="list" var="b">
-						<div class="book">
-							<img alt='' src="<s:property value="#b.picUrl"/>"/>
-							<a href="book_detail?bid=<s:property value="#b.bid"/>"><s:property value="#b.bookName"/></a>
-						</div>
-					</s:iterator>
-				</div>
-				<div id="showPage">
-					<span>第<s:property value="curPage"/>/<s:property value="totalPage"/>页</span>
-					<span>总记录数：<s:property value="totalCount"/></span>
-					<span>
-						<s:if test="curPage != 1">
-							<a href="${pageContext.request.contextPath }/book_findAll?curPage=1">[首页]</a>
-							<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage-1" />">[上一页]</a>
-						</s:if>
-						<s:if test="curPage != totalPage && totalPage != 0">
-							<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage+1" />">[下一页]</a>
-							<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="totalPage" />">[尾页]</a>
-						</s:if>
-					</span>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">图书推荐</h3>
+					</div>
+					<div class="panel-body">
+			        	<div class="row">
+			        		<s:iterator value="books" var="b">
+			        			<div class="avg_show">
+				        			<img class="img-responsive" src='<s:property value="#b.picUrl"/>'>
+				        			<a style="overflow: hidden; white-space:nowrap; display: block; text-overflow: ellipsis;" href="book_detail?bid=<s:property value="#b.bid"/>"><s:property value="#b.bookName"/></a>
+									<p style="overflow: hidden; white-space:nowrap; display: block; text-overflow: ellipsis;" class="bookinfo"><s:property value="#b.author"/></p>
+				        		</div>
+			        		</s:iterator>
+			        	</div>
+				    </div>
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -62,21 +104,19 @@
 						<h3 class="panel-title">最热图书榜</h3>
 					</div>
 					<ul class="list-group">
-						<li class="list-group-item"><div class="phb">1.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">2.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">3.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">4.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">5.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">6.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">7.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">8.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">9.<a href="#">急急急</a><p>作者</p></div></li>
-						<li class="list-group-item"><div class="phb">10.<a href="#">急急急</a><p>作者</p></div></li>
+						<s:iterator value="phb" var="b" status="st">
+							<li class="list-group-item">
+								<div class="phb">
+									<s:property value="#st.index+1"/>.<a href="book_detail?bid=<s:property value="#b.bid"/>"><s:property value="#b.bookName"/></a>
+				        			<span class="pull-right"><s:property value="#b.score"/></span>
+									<p><s:property value="#b.author"/></p>
+								</div>
+							</li>
+						</s:iterator>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>
