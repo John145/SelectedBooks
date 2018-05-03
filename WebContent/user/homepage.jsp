@@ -75,6 +75,22 @@
 			}
 		});
 	</script>
+	<script type="text/javascript">  
+// 	 $(document).ready(function() {  
+// 	    //获取Class为arcContent里面的所有img  
+// 	    var imglist=$(".outterImg img");  
+// 	    //或使用下面这句，获取ID为divArticle里面的所有img  
+// 	    //var imglist=$("#divArticle img");  
+// 	    for(var i=0;i<imglist.length;i++){   
+// 	        if(imglist[i].getAttribute('src')){  
+// 	            url = new URL(imglist[i].getAttribute('src'));   
+// 	            var frameid = 'frameimg' + Math.random();  
+// 	            window.img = '<img id="img" width="120" height="170" src=\''+url+''+Math.random()+'\' /><script>window.onload = function() { parent.document.getElementById(\''+frameid+'\').height = document.getElementById(\'img\').height+\'px\'; }<'+'/script>';  
+// 	            $(imglist[i]).parent().empty().append('<iframe id="'+frameid+'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="120" height="170"></iframe>');  
+// 	        }  
+// 	    }  
+// 	});   
+	</script>  
 </head>
 <body>
 	<s:include value="top.jsp"></s:include>

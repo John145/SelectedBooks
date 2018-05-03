@@ -5,6 +5,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<meta name=referrer content="never">
 		<title>精选图书</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/bootstrap.min.css" />
 		<script src="${pageContext.request.contextPath }/scripts/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -60,7 +61,7 @@
 				background: white;
 				border-top: 1px solid #CCC;
 			}
-			textarea{
+			#myMsg{
 				width: 100%;
 				height: 55px;
 				border: none;
@@ -105,6 +106,36 @@
 			}
 			.msgBox p{
 				margin: 0;
+			}
+			/*own样式表*/
+			.ownMsg{
+				margin-bottom: 15px;
+			}
+			.ownMsg::after{
+				content: "";  
+		        display: block;  
+		        clear: both; 
+			}
+			.ownMsg img{
+				width: 30px;
+				height: 30px;
+				border-radius: 20px;
+				margin-right: 10px;
+			}
+			.ownMsg div{
+				float: right;
+				color: #B1BAC4;
+				font-size: 0.9em;
+			}
+			.ownMsg div p{
+				text-align: right;
+			}
+			.ownMsg div .content{
+				background: rgb(239, 243, 246);
+				font-size: 1.1em;
+				color: black;
+				padding: 5px;
+				border-radius: 5px;
 			}
 		</style>
 	</head>

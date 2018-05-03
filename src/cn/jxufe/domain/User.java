@@ -14,6 +14,17 @@ public class User {
 	private String interests;
 	private String headPic;
 	
+	private Set<ChatRoomMsg> chatRoomMsgs = new HashSet<ChatRoomMsg>(0);
+	
+	
+	public Set<ChatRoomMsg> getChatRoomMsgs() {
+		return chatRoomMsgs;
+	}
+
+	public void setChatRoomMsgs(Set<ChatRoomMsg> chatRoomMsgs) {
+		this.chatRoomMsgs = chatRoomMsgs;
+	}
+
 	private Set<Book> books = new HashSet<Book>(0);
 	
 	public Set<Book> getBooks() {

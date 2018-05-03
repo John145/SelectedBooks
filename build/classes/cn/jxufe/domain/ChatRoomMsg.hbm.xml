@@ -7,9 +7,11 @@
 		<id name="cid" column="cid">
             <generator class="native" />
         </id>
-        <property name="headPic" column="head_pic"></property>
-        <property name="nickName" column="nick_name"></property>
         <property name="time" column="time"></property>
         <property name="content" column="content"></property>
+        
+        <many-to-one name="user" class="cn.jxufe.domain.User">
+            <column name="uid" />
+        </many-to-one>
 	</class>
 </hibernate-mapping>

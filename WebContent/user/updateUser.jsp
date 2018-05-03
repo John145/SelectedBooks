@@ -65,10 +65,13 @@
 		height: 170px;
 	}
 </style>
-<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div style="padding-left: 50px;padding-top: 8px;"><a href="/SelectedBooks/book_selected" style="font-size: 2.1em;">精选图书</a></div>
 	<div id="main">
 		<h4>修改个人信息</h4>
 		<s:actionmessage/>

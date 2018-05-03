@@ -20,7 +20,15 @@ public class Book {
 	private String authorIntroduce;
 	private String tags;
 	private Integer clickNumber;
+	private String sort;
 	
+	
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 	public Integer getClickNumber() {
 		return clickNumber;
 	}
@@ -131,7 +139,7 @@ public class Book {
 				+ ", publisher=" + publisher + ", translator=" + translator + ", publishYear=" + publishYear
 				+ ", pages=" + pages + ", price=" + price + ", score=" + score + ", assessNumber=" + assessNumber
 				+ ", readUrl=" + readUrl + ", contentIntroduce=" + contentIntroduce + ", authorIntroduce="
-				+ authorIntroduce + ", tags=" + tags + ", clickNumber=" + clickNumber + ", users=" + users + "]";
+				+ authorIntroduce + ", tags=" + tags + ", clickNumber=" + clickNumber + ", sort=" + sort + "]";
 	}
 
 }

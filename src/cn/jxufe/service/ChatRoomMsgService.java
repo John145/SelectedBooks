@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.jxufe.dao.ChatRoomMsgDao;
 import cn.jxufe.domain.ChatRoomMsg;
+import cn.jxufe.domain.User;
 
 public class ChatRoomMsgService {
 	private ChatRoomMsgDao chatRoomMsgDao;
@@ -11,7 +12,8 @@ public class ChatRoomMsgService {
 		this.chatRoomMsgDao = chatRoomMsgDao;
 	}
 	
-	public void save(ChatRoomMsg chatRoomMsg) {
+	public void save(ChatRoomMsg chatRoomMsg,User curUser) {
+		chatRoomMsg.setUser(curUser);
 		chatRoomMsgDao.save(chatRoomMsg);
 	}
 

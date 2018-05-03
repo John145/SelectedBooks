@@ -40,5 +40,11 @@
 			<key column="user_id"></key>
 			<many-to-many class="cn.jxufe.domain.Book" column="book_id"></many-to-many>
 		</set>
+		<set name="chatRoomMsgs">
+            <key>
+                <column name="uid" />
+            </key>
+            <one-to-many class="cn.jxufe.domain.ChatRoomMsg" />
+        </set>
     </class>
 </hibernate-mapping>

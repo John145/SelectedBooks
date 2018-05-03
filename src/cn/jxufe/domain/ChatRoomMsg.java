@@ -2,28 +2,22 @@ package cn.jxufe.domain;
 
 public class ChatRoomMsg {
 	private Integer cid;
-	private String headPic;
-	private String nickName;
 	private String time;
 	private String content;
 	
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Integer getCid() {
 		return cid;
 	}
 	public void setCid(Integer cid) {
 		this.cid = cid;
-	}
-	public String getHeadPic() {
-		return headPic;
-	}
-	public void setHeadPic(String headPic) {
-		this.headPic = headPic;
-	}
-	public String getNickName() {
-		return nickName;
-	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
 	}
 	public String getTime() {
 		return time;
@@ -39,8 +33,7 @@ public class ChatRoomMsg {
 	}
 	@Override
 	public String toString() {
-		return "ChatRoomMsg [cid=" + cid + ", headPic=" + headPic + ", nickName=" + nickName + ", time=" + time
-				+ ", content=" + content + "]";
+		return "ChatRoomMsg [cid=" + cid + ", time=" + time + ", content=" + content + "]";
 	}
 	
 }

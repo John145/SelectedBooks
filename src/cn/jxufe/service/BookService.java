@@ -116,14 +116,29 @@ public class BookService {
 		User user = userDao.get(uid);
 		String[] interests = user.getInterests().split("#");
 		//2、遍历interests，查找相应的两本书籍
+		//小说#文学#郭敬明#经典#历史#
 		for(String interest : interests) {
 			List<Book> books = bookDao.findByType(interest);
-			selectedBooks.getBooks().add(books.get(0));
-			selectedBooks.getBooks().add(books.get(1));
+			if(books.size() < 2) {
+				//0本或者1本
+				for(int i = 0; i < books.size(); i++) {
+					selectedBooks.getBooks().add(books.get(i));
+				}
+			}else {
+				selectedBooks.getBooks().add(books.get(0));
+				selectedBooks.getBooks().add(books.get(1));
+			}
 		}
 		//3、获取所有图书的排行榜前十
 		List<Book> phb = bookDao.findByClickNumber();
 		selectedBooks.setPhb(phb.subList(0, 10));
+		//判断是否有10本推荐的书籍,如果不够就去排行榜拿前几本
+		int tmp = selectedBooks.getBooks().size();
+		if(selectedBooks.getBooks().size() < 10) {
+			for(int i = 0; i < 10-tmp;i++) {
+				selectedBooks.getBooks().add(phb.get(i));
+			}
+		}
 		return selectedBooks;
 	}
 	public void update(Book book) {

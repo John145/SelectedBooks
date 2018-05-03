@@ -156,9 +156,9 @@
 												<p style="text-indent: 2em;"><s:property value="book.authorIntroduce"/></p>
 												<h4 class="alert-info">相关标签</h4>
 												<div>
-													<s:iterator value="book.tags.split('#')" status="st" var="as">  
+													<s:iterator value="book.tags.split('@')" status="st" var="as">  
 												       <a href="#" style=""><s:property value="#as"/></a>
-												    </s:iterator> 
+												    </s:iterator>
 												</div>
 												<h4 class="alert-info">留言板</h4>
 												<textarea id='msgBoard'></textarea>

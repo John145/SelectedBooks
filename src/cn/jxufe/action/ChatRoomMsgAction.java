@@ -30,9 +30,7 @@ public class ChatRoomMsgAction extends ActionSupport implements ModelDriven<Chat
 	}
 	public String save() {
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
-		chatRoomMsg.setHeadPic(curUser.getHeadPic());
-		chatRoomMsg.setNickName(curUser.getNickname());
-		chatRoomMsgService.save(chatRoomMsg);
+		chatRoomMsgService.save(chatRoomMsg,curUser);
 		try {
 			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
