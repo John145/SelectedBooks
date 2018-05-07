@@ -1,5 +1,7 @@
 package cn.jxufe.service;
 
+import java.util.Set;
+
 import cn.jxufe.dao.BookDao;
 import cn.jxufe.dao.RoleDao;
 import cn.jxufe.dao.UserDao;
@@ -49,5 +51,12 @@ public class UserService {
 		Book book = bookDao.findById(bid);
 		user.getBooks().remove(book);
 		userdao.update(user);
+	}
+	/**
+	 * 获取收藏的书籍
+	 */
+	public Set<Book> getAllCollection(Integer uid){
+		User user = userdao.get(uid);
+		return user.getBooks();
 	}
 }

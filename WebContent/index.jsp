@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>
-<s:if test="null!=#session.curUser">
-	<%response.sendRedirect("book_selected"); %>
-</s:if>
 <!DOCTYPE html>
 <html>
-
+	<s:if test="'注册用户'==#session.curUser.role.rname">
+		<%response.sendRedirect("book_selected"); %>
+	</s:if>
+	<s:elseif test="'用户管理员'==#session.curUser.role.rname">
+		用户管理员
+	</s:elseif>
+	<s:elseif test="'书籍管理员'==#session.curUser.role.rname">
+		书籍管理员
+	</s:elseif>
 	<head>
 		<meta charset="utf-8">
 		<title>登录界面</title>

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 
@@ -18,6 +19,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.jxufe.domain.Book;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.UserService;
 
@@ -31,6 +33,15 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	private UserService userService;
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	/**
+	 * 获取收藏列表
+	 */
+	public String getAllCollection() {
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		Set<Book> list = userService.getAllCollection(curUser.getUid());
+		ActionContext.getContext().getValueStack().set("list", list);
+		return "collection";
 	}
 	/**
 	 * 上传文件

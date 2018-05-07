@@ -159,7 +159,7 @@
 							<a href="${pageContext.request.contextPath }/user/updateUser.jsp"><span class="glyphicon glyphicon-user"></span> <s:property value="#session.curUser.nickname"/></a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-star"></span> 我的收藏</a>
+							<a href="${pageContext.request.contextPath }/user_getAllCollection"><span class="glyphicon glyphicon-star"></span> 我的收藏</a>
 						</li>
 						<li>
 							<a href="${pageContext.request.contextPath }/user_logout"><span class="glyphicon glyphicon-log-out"></span> 注销</a>

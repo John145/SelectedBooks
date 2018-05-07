@@ -33,6 +33,7 @@
     		<result name="BookAdmin" type="redirectAction">book_findAll?curPage=1</result>
     		<result name="chooseInterest" type="redirect">/user/registerSuccess.jsp</result>
     		<result name="update">/user/updateUser.jsp</result>
+    		<result name="collection">/user/collection.jsp</result>
     	</action>
     	<action name="checkCode" class="checkCodeAction"></action>
     	
