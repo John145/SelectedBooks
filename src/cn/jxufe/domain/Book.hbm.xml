@@ -3,58 +3,65 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-4-13 22:05:50 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="cn.jxufe.domain.Book" table="BOOK">
+    <class name="cn.jxufe.domain.Book" table="books">
         <id name="bid" type="java.lang.Integer">
-            <column name="BID" />
+            <column name="id" />
             <generator class="native" />
         </id>
         <property name="picUrl" type="java.lang.String">
-            <column name="PICURL" />
+            <column name="book_image" />
         </property>
         <property name="bookName" type="java.lang.String">
-            <column name="BOOKNAME" />
+            <column name="book_name" />
         </property>
         <property name="author" type="java.lang.String">
-            <column name="AUTHOR" />
+            <column name="book_author" />
         </property>
         <property name="publisher" type="java.lang.String">
-            <column name="PUBLISHER" />
+            <column name="publishing_company" />
         </property>
         <property name="translator" type="java.lang.String">
-            <column name="TRANSLATOR" />
+            <column name="book_translator" />
         </property>
         <property name="publishYear" type="java.lang.String">
-            <column name="PUBLISHYEAR" />
+            <column name="book_date" />
         </property>
         <property name="pages" type="java.lang.String">
-            <column name="PAGES" />
+            <column name="book_pagination" />
         </property>
         <property name="price" type="java.lang.String">
-            <column name="PRICE" />
+            <column name="book_price" />
         </property>
         <property name="score" type="java.lang.String">
-            <column name="SCORE" />
+            <column name="book_score" />
         </property>
         <property name="assessNumber" type="java.lang.String">
-            <column name="ASSESSNUMBER" />
+            <column name="book_evaluate_num" />
         </property>
         <property name="readUrl" type="java.lang.String">
-            <column name="READURL" />
+            <column name="book_online_url" />
         </property>
         <property name="contentIntroduce" type="java.lang.String">
-            <column name="CONTENTINTRODUCE" length="1024" />
+            <column name="book_content" length="1024" />
         </property>
         <property name="authorIntroduce" type="java.lang.String">
-            <column name="AUTHORINTRODUCE" length="1024" />
+            <column name="book_author_abstract" length="1024" />
         </property>
         <property name="tags" type="java.lang.String">
-            <column name="TAGS" />
+            <column name="book_tags" />
         </property>
-        <property name="clickNumber" column="click_number"></property>
+        <property name="sort" column="book_sort"></property>
+        <property name="clickNumber" column="book_click"></property>
         <!-- 放弃对users的管理 -->
         <set name="users" table="user_like_book" cascade="save-update">
 			<key column="book_id"></key>
 			<many-to-many class="cn.jxufe.domain.User" column="user_id"></many-to-many>
 		</set>
+		<set name="messageBoards" order-by="mid desc">
+        	<key>
+        		<column name="bid"></column>
+        	</key>
+        	<one-to-many class="cn.jxufe.domain.MessageBoard"/>
+        </set>
     </class>
 </hibernate-mapping>

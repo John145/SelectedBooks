@@ -1,12 +1,18 @@
 package cn.jxufe.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.jxufe.domain.Book;
 import cn.jxufe.domain.BookAndLike;
+import cn.jxufe.domain.MessageBoard;
 import cn.jxufe.domain.PageBean;
+import cn.jxufe.domain.SelectedBooks;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.BookService;
 import cn.jxufe.service.UserService;
@@ -25,6 +31,52 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		this.bookService = bookService;
 	}
 
+	private InputStream inputStream;
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	private String msgTime;
+	private String msgContent;
+	public void setMsgTime(String msgTime) {
+		this.msgTime = msgTime;
+	}
+	public void setMsgContent(String msgContent) {
+		this.msgContent = msgContent;
+	}
+	/**
+	 * 添加留言功能
+	 * @return
+	 */
+	public String addMessageBoard() {
+		MessageBoard messageBoard = new MessageBoard();
+		messageBoard.setContent(msgContent);
+		messageBoard.setTime(msgTime);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		bookService.addMessageBoard(messageBoard,book.getBid(),curUser.getUid());
+		try {
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "ajax-success";
+	}
+	
+	/**
+	 * �Ƽ�ͼ��
+	 */
+	public String selected() {
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		//�����û�û��ѡ����Ȥ���ã����ý���������
+		if(curUser.getInterests() == null || curUser.getInterests() == "") {
+			return "chooseInterest";
+		}
+		SelectedBooks selectedBooks = bookService.selected(curUser.getUid());
+		ActionContext.getContext().getValueStack().push(selectedBooks);
+		return "selected";
+	}
+	
+	
+	
 	private Integer curPage;
 	public void setCurPage(Integer curPage) {
 		this.curPage = curPage;

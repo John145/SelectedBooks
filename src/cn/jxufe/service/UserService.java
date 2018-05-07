@@ -1,7 +1,7 @@
 package cn.jxufe.service;
 
 import java.util.List;
-
+import java.util.Set;
 import cn.jxufe.dao.BookDao;
 import cn.jxufe.dao.RoleDao;
 import cn.jxufe.dao.UserDao;
@@ -28,6 +28,10 @@ public class UserService {
 	}
 	public User register(User user) {
 		//默锟斤拷锟斤拷锟斤拷为注锟斤拷锟矫伙拷权锟斤拷
+		//����Ĭ�����ͷ��
+		int random = (int) (Math.random()*9+1);
+		user.setHeadPic("img/headPic/head0"+random+".jpg");
+		//Ĭ������Ϊע���û�Ȩ��
 		Role role = roleDao.get(1);
 		user.setRole(role);
 		return userdao.save(user);
@@ -50,6 +54,7 @@ public class UserService {
 		user.getBooks().remove(book);
 		userdao.update(user);
 	}
+	
 	public User updateAdminBook(User user) {
 		Role role = roleDao.get(3);
 		user.setRole(role);
@@ -136,5 +141,12 @@ public class UserService {
 		List<User> users = userdao.findByPage(begin,pageSize);
 		pageBean.setList(users);//blm000222
 		return pageBean;
+	}
+	/**
+	 * ��ȡ�ղص��鼮
+	 */
+	public Set<Book> getAllCollection(Integer uid){
+		User user = userdao.get(uid);
+		return user.getBooks();
 	}
 }

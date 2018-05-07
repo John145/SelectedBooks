@@ -130,6 +130,12 @@
 			return count;
 		}
 		function validate(){
+			//先判断数据是否有5条
+			var count = countOfSelected();
+			if(count < 5){
+				alert("请选择五个标签！！！");
+				return ;
+			}
 			//先将数据进行封装
 			var interests = $('.interest');
 			var str = "";

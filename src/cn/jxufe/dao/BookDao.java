@@ -3,6 +3,7 @@ package cn.jxufe.dao;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -48,7 +49,6 @@ public class BookDao extends HibernateDaoSupport {
 		System.out.println(hql);
 		Book book = findById(bid);
 		this.getHibernateTemplate().delete(book);
-		System.out.println("删锟斤拷锟缴癸拷");
 	}
 	/**
 	 * 通过bid查询book对象
@@ -64,7 +64,27 @@ public class BookDao extends HibernateDaoSupport {
 	public void update(Book book) {
 		this.getHibernateTemplate().update(book);
 	}
+	/**
+	 * 通过类型查找相应的书籍，然后对点击量进行降序排序
+	 * @param interest
+	 * @return
+	 */
+	public List<Book> findByType(String interest) {
+		String hql = "from Book where sort=? order by clickNumber desc";
+		List<Book> list = this.getHibernateTemplate().find(hql,interest);
+		return list;
+	}
 
+	public List<Book> findByClickNumber() {
+//		String hql = "from Book order by clickNumber desc";
+//		List<Book> list = this.getHibernateTemplate().find(hql);
+//		return list;
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.addOrder(Order.desc("clickNumber"));
+		criteria.getExecutableCriteria(getSession()).setMaxResults(10);
+		List<Book> list = this.getHibernateTemplate().findByCriteria(criteria);
+		return list;
+	}
 	public void add(Book book) {
 		this.getHibernateTemplate().save(book);
 	}

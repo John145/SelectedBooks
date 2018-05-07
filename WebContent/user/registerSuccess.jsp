@@ -9,8 +9,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery.min.js"></script>
 </head>
 <body>
-	<h3>注册成功</h3>
-	<p>页面即将在<span>3</span>秒后跳转到登陆界面，如果没有正常跳转请点击下面</p>
+	<h3>完善兴趣爱好成功</h3>
+	<p>页面即将在<span>3</span>秒后跳转到主界面，如果没有正常跳转请点击下面</p>
 	<a href="${pageContext.request.contextPath }/index.jsp">登陆账号</a>
 	<script type="text/javascript">
 		$(document).ready(function(){

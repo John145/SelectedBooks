@@ -28,7 +28,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
@@ -37,6 +37,8 @@
 				<value>cn/jxufe/domain/Role.hbm.xml</value>
 				<value>cn/jxufe/domain/User.hbm.xml</value>
 				<value>cn/jxufe/domain/Book.hbm.xml</value>
+				<value>cn/jxufe/domain/ChatRoomMsg.hbm.xml</value>
+				<value>cn/jxufe/domain/MessageBoard.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -49,6 +51,9 @@
 		<property name="bookService" ref="bookService"></property>
 	</bean>
 	<bean id="checkCodeAction" class="cn.jxufe.action.CheckCodeAction" scope="prototype"></bean>
+	<bean id="chatRoomMsgAction" class="cn.jxufe.action.ChatRoomMsgAction">
+		<property name="chatRoomMsgService" ref="chatRoomMsgService"></property>
+	</bean>
 	
 	<!-- Service -->
 	<bean id="userService" class="cn.jxufe.service.UserService">
@@ -59,6 +64,10 @@
 	<bean id="bookService" class="cn.jxufe.service.BookService">
 		<property name="bookDao" ref="bookDao"></property>
 		<property name="userDao" ref="userDao"></property>
+		<property name="messageBoardDao" ref="messageBoardDao"></property>
+	</bean>
+	<bean id="chatRoomMsgService" class="cn.jxufe.service.ChatRoomMsgService">
+		<property name="chatRoomMsgDao" ref="chatRoomMsgDao"></property>
 	</bean>
 	
 	<!-- Dao -->
@@ -71,6 +80,12 @@
 	<bean id="roleDao" class="cn.jxufe.dao.RoleDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="chatRoomMsgDao" class="cn.jxufe.dao.ChatRoomMsgDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="messageBoardDao" class="cn.jxufe.dao.MessageBoardDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 	<!-- 配置拦截器 -->
 	<bean id="loginInterceptor" class="cn.jxufe.interceptor.LoginInterceptor"></bean>
@@ -81,6 +96,7 @@
 	</bean>
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
+			<!-- 设置进行事务操作的方法匹配规则 -->
 			<tx:method name="get*" read-only="true"/>
 			<tx:method name="*"/>
 		</tx:attributes>

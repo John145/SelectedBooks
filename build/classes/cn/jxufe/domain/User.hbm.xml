@@ -30,12 +30,27 @@
         <property name="interests" type="java.lang.String">
             <column name="INTERESTS" />
         </property>
+        <property name="headPic" type="java.lang.String">
+            <column name="head_pic" />
+        </property>
         <many-to-one name="role" class="cn.jxufe.domain.Role">
             <column name="RID" />
         </many-to-one>
-        <set name="books" table="user_like_book" cascade="save-update">
+        <set name="books" order-by="book_id asc" table="user_like_book" cascade="save-update">
 			<key column="user_id"></key>
 			<many-to-many class="cn.jxufe.domain.Book" column="book_id"></many-to-many>
 		</set>
+		<set name="chatRoomMsgs">
+            <key>
+                <column name="uid" />
+            </key>
+            <one-to-many class="cn.jxufe.domain.ChatRoomMsg" />
+        </set>
+        <set name="messageBoards">
+        	<key>
+        		<column name="uid"></column>
+        	</key>
+        	<one-to-many class="cn.jxufe.domain.MessageBoard"/>
+        </set>
     </class>
 </hibernate-mapping>

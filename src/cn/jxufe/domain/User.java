@@ -12,6 +12,30 @@ public class User {
 	private String email;
 	private String address;
 	private String interests;
+	private String headPic;
+	
+	private Set<MessageBoard> messageBoards = new HashSet<MessageBoard>(0);
+	
+	
+	public Set<MessageBoard> getMessageBoards() {
+		return messageBoards;
+	}
+
+	public void setMessageBoards(Set<MessageBoard> messageBoards) {
+		this.messageBoards = messageBoards;
+	}
+
+	private Set<ChatRoomMsg> chatRoomMsgs = new HashSet<ChatRoomMsg>(0);
+	
+	
+	public Set<ChatRoomMsg> getChatRoomMsgs() {
+		return chatRoomMsgs;
+	}
+
+	public void setChatRoomMsgs(Set<ChatRoomMsg> chatRoomMsgs) {
+		this.chatRoomMsgs = chatRoomMsgs;
+	}
+
 	private Set<Book> books = new HashSet<Book>(0);
 	
 	public Set<Book> getBooks() {
@@ -96,9 +120,19 @@ public class User {
 		this.role = role;
 	}
 
+	public String getHeadPic() {
+		return headPic;
+	}
+
+	public void setHeadPic(String headPic) {
+		this.headPic = headPic;
+	}
+
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", sex=" + sex + ", nickname="
-				+ nickname + ", email=" + email + ", address=" + address + ", interests=" + interests + "]";
+				+ nickname + ", email=" + email + ", address=" + address + ", interests=" + interests + ", headPic="
+				+ headPic + "]";
 	}
+	
 }
