@@ -1,11 +1,16 @@
 package cn.jxufe.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.jxufe.domain.Book;
 import cn.jxufe.domain.BookAndLike;
+import cn.jxufe.domain.MessageBoard;
 import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.SelectedBooks;
 import cn.jxufe.domain.User;
@@ -24,12 +29,42 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
 	}
+	private InputStream inputStream;
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	private String msgTime;
+	private String msgContent;
+	public void setMsgTime(String msgTime) {
+		this.msgTime = msgTime;
+	}
+	public void setMsgContent(String msgContent) {
+		this.msgContent = msgContent;
+	}
 	/**
-	 * ÍÆ¼öÍ¼Êé
+	 * æ·»åŠ ç•™è¨€åŠŸèƒ½
+	 * @return
+	 */
+	public String addMessageBoard() {
+		MessageBoard messageBoard = new MessageBoard();
+		messageBoard.setContent(msgContent);
+		messageBoard.setTime(msgTime);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		bookService.addMessageBoard(messageBoard,book.getBid(),curUser.getUid());
+		try {
+			inputStream = new ByteArrayInputStream("1".getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "ajax-success";
+	}
+	
+	/**
+	 * ï¿½Æ¼ï¿½Í¼ï¿½ï¿½
 	 */
 	public String selected() {
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
-		//¿ÉÄÜÓÃ»§Ã»ÓÐÑ¡ÔñÐËÈ¤°®ºÃ£¬Ôò²»ÈÃ½øÈëÖ÷½çÃæ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ã»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½È¤ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(curUser.getInterests() == null || curUser.getInterests() == "") {
 			return "chooseInterest";
 		}

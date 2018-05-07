@@ -98,6 +98,27 @@
 						alert("刷新页面重试");
 					}
 				});
+				$('#sendMsgBorad').click(function(){
+					var content = $('#msgBoard').val();
+					if(content == ""){
+						alert("留言框为空！！！");
+						return ;
+					}
+					var date = new Date();
+					var dateStr = date.getFullYear()+"年"+(date.getMonth()+1)+"月"+
+						date.getDate()+"日 "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+					$.post("book_addMessageBoard",
+							{"msgTime":dateStr,"msgContent":content,"bid":"<s:property value="book.bid"/>"},function(data){
+								console.log(data);
+								$('#msgBoard').val("");
+								//添加留言
+								var tmp = $('<li class="list-group-item"><div class="user"><span class="alert-info"><s:property value="#session.curUser.username" /></span><span class="pull-right" style="color: #666666;">'+
+									dateStr+'</span></div><p class="comment" style="text-indent: 2em;">'+
+									content+'</p></li>');
+								$('#ul_msg').prepend(tmp);
+							});
+					
+				});
 			});
 		</script>
 	</head>
@@ -162,49 +183,17 @@
 												</div>
 												<h4 class="alert-info">留言板</h4>
 												<textarea id='msgBoard'></textarea>
-												<button style="margin-top: 5px;" type="button" class="btn-info">发表</button>
+												<button id="sendMsgBorad" style="margin-top: 5px;" type="button" class="btn-info">发表</button>
 												<hr style="border: 1px solid #ccc;" />
-												<ul class="list-group">
-													<li class="list-group-item">
-														<div class="user">
-															<span class="alert-info">酷肖2016</span><span class="pull-right" style="color: #666666;">2018.5.6</span>
-														</div>
-														<p class="comment" style="text-indent: 2em;">
-															痴情的德国特工… 从充满灰尘和危险的煤矿到闪闪发光的皇室宫殿，从代
-															表着权力的走廊到爱恨纠缠的卧室，五个家族迥然不同又纠葛不断的命运逐渐揭晓，波澜
-															壮阔地展现了一个我们自认为了解，但从未如此真切感受过.
-														</p>
-													</li>
-													<li class="list-group-item">
-														<div class="user">
-															<span class="alert-info">陈翔六点半</span><span class="pull-right" style="color: #666666;">2018.5.6</span>
-														</div>
-														<p class="comment" style="text-indent: 2em;">
-															痴情的德国特工… 从充满灰尘和危险的煤矿到闪闪发光的皇室宫殿，从代
-															表着权力的走廊到爱恨纠缠的卧室，五个家族迥然不同又纠葛不断的命运逐渐揭晓，波澜
-															壮阔地展现了一个我们自认为了解，但从未如此真切感受过.
-														</p>
-													</li>
-													<li class="list-group-item">
-														<div class="user">
-															<span class="alert-info">天天</span><span class="pull-right" style="color: #666666;">2018.5.6</span>
-														</div>
-														<p class="comment" style="text-indent: 2em;">
-															痴情的德国特工… 从充满灰尘和危险的煤矿到闪闪发光的皇室宫殿，从代
-															表着权力的走廊到爱恨纠缠的卧室，五个家族迥然不同又纠葛不断的命运逐渐揭晓，波澜
-															壮阔地展现了一个我们自认为了解，但从未如此真切感受过.
-														</p>
-													</li>
-													<li class="list-group-item">
-														<div class="user">
-															<span class="alert-info">斗地主</span><span class="pull-right" style="color: #666666;">2018.5.6</span>
-														</div>
-														<p class="comment" style="text-indent: 2em;">
-															痴情的德国特工… 从充满灰尘和危险的煤矿到闪闪发光的皇室宫殿，从代
-															表着权力的走廊到爱恨纠缠的卧室，五个家族迥然不同又纠葛不断的命运逐渐揭晓，波澜
-															壮阔地展现了一个我们自认为了解，但从未如此真切感受过.
-														</p>
-													</li>
+												<ul class="list-group" id="ul_msg">
+													<s:iterator value="messageBoards">
+														<li class="list-group-item">
+															<div class="user">
+																<span class="alert-info"><s:property value="user.username" /></span><span class="pull-right" style="color: #666666;"><s:property value="time" /></span>
+															</div>
+															<p class="comment" style="text-indent: 2em;"><s:property value="content" /></p>
+														</li>
+													</s:iterator>
 												</ul>
 											</div>
 											

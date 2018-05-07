@@ -46,5 +46,11 @@
             </key>
             <one-to-many class="cn.jxufe.domain.ChatRoomMsg" />
         </set>
+        <set name="messageBoards">
+        	<key>
+        		<column name="uid"></column>
+        	</key>
+        	<one-to-many class="cn.jxufe.domain.MessageBoard"/>
+        </set>
     </class>
 </hibernate-mapping>

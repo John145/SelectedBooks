@@ -14,6 +14,17 @@ public class User {
 	private String interests;
 	private String headPic;
 	
+	private Set<MessageBoard> messageBoards = new HashSet<MessageBoard>(0);
+	
+	
+	public Set<MessageBoard> getMessageBoards() {
+		return messageBoards;
+	}
+
+	public void setMessageBoards(Set<MessageBoard> messageBoards) {
+		this.messageBoards = messageBoards;
+	}
+
 	private Set<ChatRoomMsg> chatRoomMsgs = new HashSet<ChatRoomMsg>(0);
 	
 	

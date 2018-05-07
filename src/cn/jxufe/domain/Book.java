@@ -22,7 +22,15 @@ public class Book {
 	private Integer clickNumber;
 	private String sort;
 	
+	private Set<MessageBoard> messageBoards = new HashSet<MessageBoard>(0);
 	
+	
+	public Set<MessageBoard> getMessageBoards() {
+		return messageBoards;
+	}
+	public void setMessageBoards(Set<MessageBoard> messageBoards) {
+		this.messageBoards = messageBoards;
+	}
 	public String getSort() {
 		return sort;
 	}

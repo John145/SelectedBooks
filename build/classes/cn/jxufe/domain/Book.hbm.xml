@@ -57,5 +57,11 @@
 			<key column="book_id"></key>
 			<many-to-many class="cn.jxufe.domain.User" column="user_id"></many-to-many>
 		</set>
+		<set name="messageBoards" order-by="mid desc">
+        	<key>
+        		<column name="bid"></column>
+        	</key>
+        	<one-to-many class="cn.jxufe.domain.MessageBoard"/>
+        </set>
     </class>
 </hibernate-mapping>
