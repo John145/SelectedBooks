@@ -23,73 +23,6 @@
 			float: left;
 			position: relative;
 		}
-		#search{
-			height: 25px;
-			position:absolute;
-			float:left;
-			top: 20px;
-			left:30px;
-		}
-		#outer{
-			width: 1100px;
-			height:450px;
-			float:left;
-			padding-top:25px;
-			background-image:url(images/content/dotted.png);
-		}
-		.TABLE{
-			float: left;
-			border: 1px solid gray;
-			margin-left: 30px;
-			margin-top: 30px;
-		}
-		.TABLE p{
-			padding:0px;
-			margin:0px;
-			height: 15px;
-			font-size: 15px;
-		}
-		.ID{
-			height:30px;
-			width: 100px;
-		}
-		.BOOKNAME{
-			height: 30px;
-			width: 150px;
-		}
-		
-		.AUTHOR{
-			height: 30px;
-			width: 100px;
-		}
-		
-		.PUBLISHER{
-			height: 30px;
-			width: 150px;
-		}
-		
-		.PUBLISHYEAR{
-			height: 30px;
-			width: 150px;
-		}
-		.SCORE{
-			height: 30px;
-			width:50px;
-		}
-		.PRICE{
-			height: 30px;
-			width: 100px;
-		}
-		.TAGS{
-			height: 30px;
-			width: 100px;
-		}
-		#showPage{
-			width:1100px;
-			height: 25px;
-			float:left;
-			background-image:url(images/content/dotted.png);
-		}
 		.leftsidebar_box{
 			width:160px;
 			height:100% !important;
@@ -207,85 +140,19 @@
 			</div>
 		</div>
 		<div id="right">
-			<div id="search">
-				<s:form action="book_search" method="get" theme="simple">
-					
-					<input name="curPage" type="hidden" value="1">
-					<s:textfield name="keyword" placeholder="书名/作者/类型" style="height: 20px;  border: 1px soile black;"></s:textfield>
-					<input type="submit" value="搜索"  style="height: 25px;">
-				</s:form>
-			</div>
-			<div id="outer">
-				<table border="1" cellspacing="0" class="TABLE">
-					<tr>
-						<td class="ID" align="center">书本序号</td>
-						<td class="BOOKNAME" align="center" >书本名字</td>
-						<td class="AUTHOR" align="center" >作者</td>
-						<td class="PUBLISHER" align="center" >出版社</td>
-						<td class="PUBLISHYEAR" align="center" >出版时间</td>
-						<td class="SCORE" align="center" >评分</td>
-						<td class="PRICE" align="center">价钱</td>
-						<td class="TAGS" align="center">标签</td>
-						<td class="DELETE" align="center" colspan="3">操作</td>
-					</tr>
-					<s:iterator value="list" var="b">
-						<tr bgcolor="white">
-							<td align="center" class="ID"><s:property value="#b.bid"/></td>
-							<td align="center" class="BOOKNAME">
-								<p style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.bookName"/>
-								</p>
-							</td>
-							<td align="center" class="AUTHOR">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.author"/>
-								</p>
-							</td>
-							<td align="center" class="PUBLISHER">
-								<p style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.publisher"/>
-								</p>
-							</td>
-							<td align="center" class="PUBLISHYEAR">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.publishYear"/>
-								</p>
-							</td>
-							<td align="center" class="SCORE">
-								<s:property value="#b.score"/>
-							</td>
-							<td align="center" class="PRICE">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.price"/>
-								</p>
-							</td>
-							<td align="center"  class="TAGS">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.tags"/>
-								</p>
-							</td>
-							<td align="center" class="DELETE">
-							<a class="delete" href="${pageContext.request.contextPath }/book_delete?bid=<s:property value="#b.bid" />&curPage=<s:property value="curPage" />">删除</a>
-							<a href="${pageContext.request.contextPath }/book_AdminUpdate?bid=<s:property value="#b.bid" />">修改</a>
-							<a href="">查看</a></td>
-						</tr>
-					</s:iterator>
-				</table>
-			</div>
-			<div id="showPage">
-				<span>&nbsp;&nbsp;第<s:property value="curPage"/>/<s:property value="totalPage"/>页</span>
-				<span>总记录数：<s:property value="totalCount"/></span>
-				<span>
-					<s:if test="curPage != 1">
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=1">[首页]</a>
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage-1" />">[上一页]</a>
-					</s:if>
-					<s:if test="curPage != totalPage && totalPage != 0">
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage+1" />">[下一页]</a>
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="totalPage" />">[尾页]</a>
-					</s:if>
-				</span>
-			</div>
+			<form action="user_informationupdate">
+			基本资料：<br><br>
+			序号：<s:property value="uid"/><br><br>
+			<input type="hidden" name="uid" value="<s:property value="uid"/>" />
+			用户名：<input name="username" value="<s:property value="username"/>"><br><br>
+			<input type="hidden" name="password" value="<s:property value="password"/>">
+			性别：<input name="sex" value="<s:property value="sex"/>"><br><br>
+			昵称：<input name="nickname" value="<s:property value="nickname"/>"><br><br>
+			邮箱：<input name="email" value="<s:property value="email"/>"><br><br>
+			地址：<input name="address" value="<s:property value="address"/>"><br><br>
+			<input type="hidden" name="rid" value="<s:property value="Role.rid"/>">
+			<input type="submit" value="提交"/>
+		</form>
 		</div>
 	</div>
 </body>

@@ -49,38 +49,38 @@
 			height: 15px;
 			font-size: 15px;
 		}
-		.ID{
+		.UID{
 			height:30px;
-			width: 100px;
+			width: 50px;
 		}
-		.BOOKNAME{
-			height: 30px;
-			width: 150px;
-		}
-		
-		.AUTHOR{
+		.USERNAME{
 			height: 30px;
 			width: 100px;
 		}
 		
-		.PUBLISHER{
+		.SEX{
+			height: 30px;
+			width: 100px;
+		}
+		
+		.NICKNAME{
 			height: 30px;
 			width: 150px;
 		}
 		
-		.PUBLISHYEAR{
+		.EMAIL{
 			height: 30px;
 			width: 150px;
 		}
-		.SCORE{
+		.ADDRESS{
 			height: 30px;
-			width:50px;
+			width:150px;
 		}
-		.PRICE{
+		.RID{
 			height: 30px;
-			width: 100px;
+			width: 30px;
 		}
-		.TAGS{
+		.INTERESTS{
 			height: 30px;
 			width: 100px;
 		}
@@ -145,65 +145,25 @@
 </head>
 <body>
 	<div id="big">
-		<jsp:include page="top.jsp"></jsp:include>
+		<jsp:include page="Useradmintop.jsp"></jsp:include>
 		<div id="left">
 			<div class="leftsidebar_box">
 			<div class="line"></div>
 
 			<dl class="custom">
-				<dt onClick="changeImage()">书籍管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_Adminadd">增加书籍</a></dd>
-				<dd><a href="#">删除书籍</a></dd>
-				<dd><a href="#">修改书籍</a></dd>
-				<dd><a href="#">查询书籍</a></dd>
+				<dt onClick="changeImage()">用户管理<img src="images/left/select_xl01.png"></dt>
+				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_findAll_register?curPage=1">注册用户</a></dd>
+				<dd><a href="${pageContext.request.contextPath }/user_findAll_bookadmin?curPage=1">书籍管理员</a></dd>
+				<dd><a href="${pageContext.request.contextPath }/user_findAll?curPage=1">全部用户</a></dd>
 			</dl>
-			
 			<dl class="channel">
-				<dt onClick="changeImage()">个人信息<img src="images/left/select_xl01.png"></dt>
+				<dt onClick="changeImage()">权限管理<img src="images/left/select_xl01.png"></dt>
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
 				<dd><a href="#">渠道标准管理</a></dd>
 				<dd><a href="#">系统通知</a></dd>
 				<dd><a href="#">渠道商管理</a></dd>
 				<dd><a href="#">渠道商链接</a></dd>
 			</dl>
-			
-			<dl class="app">
-				<dt onClick="changeImage()">APP管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">App运营商管理</a></dd>
-				<dd><a href="#">开放接口管理</a></dd>
-				<dd><a href="#">接口类型管理</a></dd>
-			</dl>
-			
-			<dl class="cloud">
-				<dt>大数据云平台<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">平台运营商管理</a></dd>
-			</dl>
-			
-			<dl class="syetem_management">
-				<dt>系统管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">后台用户管理</a></dd>
-				<dd><a href="#">角色管理</a></dd>
-				<dd><a href="#">客户类型管理</a></dd>
-				<dd><a href="#">栏目管理</a></dd>
-				<dd><a href="#">微官网模板组管理</a></dd>
-				<dd><a href="#">商城模板管理</a></dd>
-				<dd><a href="#">微功能管理</a></dd>
-				<dd><a href="#">修改用户密码</a></dd>
-			</dl>
-			
-			<dl class="source">
-				<dt>素材库管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">图片库</a></dd>
-				<dd><a href="#">链接库</a></dd>
-				<dd><a href="#">推广管理</a></dd>
-			</dl>
-			
-			<dl class="statistics">
-				<dt>统计分析<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">客户统计</a></dd>
-			</dl>
-			
-			<!--  <a href="${pageContext.request.contextPath }/book_Adminadd">增加5</a><br />-->
 			</div>
 		</div>
 		<div id="right">
@@ -218,58 +178,60 @@
 			<div id="outer">
 				<table border="1" cellspacing="0" class="TABLE">
 					<tr>
-						<td class="ID" align="center">书本序号</td>
-						<td class="BOOKNAME" align="center" >书本名字</td>
-						<td class="AUTHOR" align="center" >作者</td>
-						<td class="PUBLISHER" align="center" >出版社</td>
-						<td class="PUBLISHYEAR" align="center" >出版时间</td>
-						<td class="SCORE" align="center" >评分</td>
-						<td class="PRICE" align="center">价钱</td>
-						<td class="TAGS" align="center">标签</td>
+						<td class="UID" align="center">用户ID</td>
+						<td class="USERNAME" align="center" >用户名</td>
+						<td class="SEX" align="center" >用户性别</td>
+						<td class="NICKNAME" align="center" >昵称</td>
+						<td class="EMAIL" align="center" >电子邮箱</td>
+						<td class="ADDRESS" align="center" >地址</td>
+						<td class="RID" align="center">权限</td>
+						<td class="INTERESTS" align="center">兴趣</td>
 						<td class="DELETE" align="center" colspan="3">操作</td>
 					</tr>
-					<s:iterator value="list" var="b">
+					<s:iterator value="list" var="u">
 						<tr bgcolor="white">
-							<td align="center" class="ID"><s:property value="#b.bid"/></td>
-							<td align="center" class="BOOKNAME">
+							<td align="center" class="UID">
+								<s:property value="#u.uid"/>
+							</td>
+							<td align="center" class="USERNAME">
+								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+								<s:property value="#u.username"/>
+								</p>
+							</td>
+							<td align="center" class="SEX">
+								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+								<s:property value="#u.sex"/>
+								</p>
+							</td>
+							<td align="center" class="NICKNAME">
 								<p style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.bookName"/>
+								<s:property value="#u.nickname"/>
 								</p>
 							</td>
-							<td align="center" class="AUTHOR">
+							<td align="center" class="EMAIL">
 								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.author"/>
+								<s:property value="#u.email"/>
 								</p>
 							</td>
-							<td align="center" class="PUBLISHER">
-								<p style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.publisher"/>
-								</p>
+							<td align="center" class="ADDRESS">
+								<s:property value="#u.address"/>
 							</td>
-							<td align="center" class="PUBLISHYEAR">
+							<td align="center" class="RID">
 								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.publishYear"/>
+								<s:property value="#u.role.rname"/>
 								</p>
 							</td>
-							<td align="center" class="SCORE">
-								<s:property value="#b.score"/>
-							</td>
-							<td align="center" class="PRICE">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.price"/>
-								</p>
-							</td>
-							<td align="center"  class="TAGS">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#b.tags"/>
+							<td align="center"  class="INTERESTS">
+								<p style="width:20px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+								<s:property value="#u.interests"/>
 								</p>
 							</td>
 							<td align="center" class="DELETE">
-							<a class="delete" href="${pageContext.request.contextPath }/book_delete?bid=<s:property value="#b.bid" />&curPage=<s:property value="curPage" />">删除</a>
+							<a class="delete" href="${pageContext.request.contextPath }/user_delete?uid=<s:property value="#u.uid" />&curPage=<s:property value="curPage" />">删除</a>
 							<a href="${pageContext.request.contextPath }/book_AdminUpdate?bid=<s:property value="#b.bid" />">修改</a>
 							<a href="">查看</a></td>
 						</tr>
-					</s:iterator>
+					</s:iterator>		
 				</table>
 			</div>
 			<div id="showPage">
@@ -277,12 +239,12 @@
 				<span>总记录数：<s:property value="totalCount"/></span>
 				<span>
 					<s:if test="curPage != 1">
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=1">[首页]</a>
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage-1" />">[上一页]</a>
+						<a href="${pageContext.request.contextPath }/user_findAll_bookadmin?curPage=1">[首页]</a>
+						<a href="${pageContext.request.contextPath }/user_findAll_bookadmin?curPage=<s:property value="curPage-1" />">[上一页]</a>
 					</s:if>
 					<s:if test="curPage != totalPage && totalPage != 0">
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="curPage+1" />">[下一页]</a>
-						<a href="${pageContext.request.contextPath }/book_findAll?curPage=<s:property value="totalPage" />">[尾页]</a>
+						<a href="${pageContext.request.contextPath }/user_findAll_bookadmin?curPage=<s:property value="curPage+1" />">[下一页]</a>
+						<a href="${pageContext.request.contextPath }/user_findAll_bookadmin?curPage=<s:property value="totalPage" />">[尾页]</a>
 					</s:if>
 				</span>
 			</div>

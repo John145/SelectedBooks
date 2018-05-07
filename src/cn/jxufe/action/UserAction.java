@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.jxufe.domain.Book;
+import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.Role;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.UserService;
@@ -37,23 +38,23 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "chooseInterest";
 	}
 	public String login() {
-		System.out.println("ÇëÇóµÇÂ½");
+		System.out.println("è¯·æ±‚ç™»é™†");
 		if(!checkCode.toLowerCase().equals(ActionContext.getContext().getSession().get("checkCode"))) {
-			this.addActionError("ÑéÖ¤Âë´íÎó!");
+			this.addActionError("éªŒè¯ç é”™è¯¯!");
 			return INPUT;
 		}
 		User curUser = userService.login(user);
 		
 		if(curUser == null) {
-			this.addActionError("ÓÃ»§ÃûÃÜÂë´íÎó!");
+			this.addActionError("ç”¨æˆ·åå¯†ç é”™è¯¯!");
 			return INPUT;
-		}else if(curUser.getRole().getRname().equals("×¢²áÓÃ»§")) {
+		}else if(curUser.getRole().getRname().equals("æ³¨å†Œç”¨æˆ·")) {
 			ActionContext.getContext().getSession().put("curUser", curUser);
 			return SUCCESS;
-		}else if(curUser.getRole().getRname().equals("Êé¼®¹ÜÀíÔ±")) {
+		}else if(curUser.getRole().getRname().equals("ä¹¦ç±ç®¡ç†å‘˜")) {
 			ActionContext.getContext().getSession().put("curUser", curUser);
 			return "BookAdmin";
-		}else if(curUser.getRole().getRname().equals("ÓÃ»§¹ÜÀíÔ±")) {
+		}else if(curUser.getRole().getRname().equals("ç”¨æˆ·ç®¡ç†å‘˜")) {
 			ActionContext.getContext().getSession().put("curUser", curUser);
 			return "UserAdmin";
 		}
@@ -68,14 +69,14 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		this.checkCode = checkCode;
 	}
 	public String register() {
-		System.out.println("×¢²áÓÃ»§£º"+user);
+		System.out.println("æ³¨å†Œç”¨æˆ·ï¼š"+user);
 		if(!checkCode.toLowerCase().equals(ActionContext.getContext().getSession().get("checkCode"))) {
-			this.addActionError("×¢²áÊ§°Ü£¨ÑéÖ¤Âë´íÎó£©");
+			this.addActionError("æ³¨å†Œå¤±è´¥ï¼ˆéªŒè¯ç é”™è¯¯ï¼‰");
 			return "register";
 		}
 		if(user.getUsername().equals("") || !userService.usernameIsvalid(user.getUsername()) ||
 				user.getPassword().equals("")) {
-			this.addActionError("×¢²áÊ§°Ü£¨ÓÃ»§ÃûºÍÃÜÂëÊäÈë¸ñÊ½ÓĞÎó£©");
+			this.addActionError("æ³¨å†Œå¤±è´¥ï¼ˆç”¨æˆ·åå’Œå¯†ç è¾“å…¥æ ¼å¼æœ‰è¯¯ï¼‰");
 			return "register";
 		}
 		User curUser = userService.register(user);
@@ -103,7 +104,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		this.bid = bid;
 	}
 	public String addBook() {
-		//Ìí¼ÓÊÕ²ØÊé¼®
+		//é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è©¹é”Ÿæ–¤æ‹·æ¦§ï¿½
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
 		userService.addBook(curUser.getUid(),bid);
 		try {
@@ -114,7 +115,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "ajax-success";
 	}
 	public String removeBook() {
-		//É¾³ıÊÕ²ØÊé¼®
+		//åˆ é”Ÿæ–¤æ‹·é”Ÿç§¸è¯§æ‹·é”Ÿä»‹ç±
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
 		userService.removeBook(curUser.getUid(),bid);
 		try {
@@ -124,4 +125,50 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		}
 		return "ajax-success";
 	}
+	public String personalinformation() {
+		//é”Ÿä»‹ç±é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·å‘˜é”Ÿæ–¤æ‹·ç¤ºé”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ¯
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		ActionContext.getContext().getValueStack().push(curUser);
+		return "information";
+	}
+	public String informationupdate() {
+		//é”Ÿç«é©æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”ŸçŸ«ä¼™æ‹·é”Ÿæ–¤æ‹·æ¯
+		User usernew = new User();
+		usernew = userService.updateAdminBook(user);
+		ActionContext.getContext().getSession().put("curUser", user);
+		return "informationupdate";
+	}
+	private Integer curPage;
+	public void setCurPage(Integer curPage) {
+		this.curPage = curPage;
+	}
+	public String findAll() {
+		PageBean<User> pageBean = userService.findByPage(curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		ActionContext.getContext().getValueStack().push(curUser);
+		return "findAll";
+	}
+	public String findAll_register() {
+		PageBean<User> pageBean = userService.findByPage_register(curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		ActionContext.getContext().getValueStack().push(curUser);
+		return "findAll_register";
+	}
+	public String findAll_bookadmin() {
+		PageBean<User> pageBean = userService.findByPage_bookAdmin(curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		ActionContext.getContext().getValueStack().push(curUser);
+		return "findAll_bookadmin";
+	}
+	public String delete() {
+		System.out.println(user.getUid());
+		PageBean<User> pageBean = userService.delByKeyword(user.getUid(),curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		System.out.println("delete()");
+		return "delete";
+	}
+	
 }

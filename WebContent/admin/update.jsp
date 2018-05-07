@@ -92,8 +92,8 @@
 			</dl>
 			
 			<dl class="channel">
-				<dt>渠道管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">渠道主页</a></dd>
+				<dt onClick="changeImage()">个人信息<img src="images/left/select_xl01.png"></dt>
+				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
 				<dd><a href="#">渠道标准管理</a></dd>
 				<dd><a href="#">系统通知</a></dd>
 				<dd><a href="#">渠道商管理</a></dd>

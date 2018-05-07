@@ -1,7 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=b16b840cbbf7921f770d3e0224675867e889cc5b
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//src/cn/jxufe/action/BookAction.java=UTF-8
-=======
 encoding//WebContent/index.jsp=UTF-8
 encoding//WebContent/user/register.jsp=UTF-8
->>>>>>> b16b840cbbf7921f770d3e0224675867e889cc5b
+encoding//src/cn/jxufe/action/BookAction.java=UTF-8
+encoding//src/cn/jxufe/action/UserAction.java=UTF-8
+encoding//src/cn/jxufe/service/UserService.java=UTF-8

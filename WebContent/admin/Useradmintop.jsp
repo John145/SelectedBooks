@@ -59,7 +59,7 @@
 	<div id="top">
 	
 		<div id="logo">	
-			<p style="color: white;">书籍后台管理系统</p>
+			<p style="color: white;">用户后台管理系统</p>
 		</div>
 		<div id="operation">
 			<div id="Username">

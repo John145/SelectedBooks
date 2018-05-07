@@ -9,6 +9,7 @@ import cn.jxufe.domain.BookAndLike;
 import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.BookService;
+import cn.jxufe.service.UserService;
 
 
 public class BookAction extends ActionSupport implements ModelDriven<Book> {
@@ -23,6 +24,7 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
 	}
+
 	private Integer curPage;
 	public void setCurPage(Integer curPage) {
 		this.curPage = curPage;
@@ -34,8 +36,11 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		User user = (User) ActionContext.getContext().getSession().get("curUser");
 		if(user.getRole().getRname().equals("注册用户")){
 			return "findAll";
+		}else if(user.getRole().getRname().equals("书籍管理员")) {
+			return "BookAdminfindAll";
 		}else {
-			return "AdminfindAll";
+			System.out.println("用户管理员");
+			return "UserAdminfindAll";
 		}
 	}
 	
@@ -85,8 +90,6 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		return "AdminUpdate";
 	}
 	public String update() {
-		System.out.println("bookActionupdate");
-		System.out.println(book);
 		bookService.update(book);
 		return "update";
 	}
