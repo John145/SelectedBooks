@@ -53,7 +53,7 @@ public class UserDao extends HibernateDaoSupport {
 		return null;
 	}
 	public int findCount() {
-		String hql = "select count(*) from User";
+		String hql = "select count(*) from User where rid = 1";
 		List<Long> list = this.getHibernateTemplate().find(hql);
 		if(list.size() > 0) {
 			return list.get(0).intValue();
@@ -62,6 +62,7 @@ public class UserDao extends HibernateDaoSupport {
 	}
 	public List<User> findByPage(int begin, int pageSize) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+		criteria.add(Restrictions.eq("role.rid", new Integer(1)));
 		List<User> list = this.getHibernateTemplate().findByCriteria(criteria,begin,pageSize);
 		return list;
 	}

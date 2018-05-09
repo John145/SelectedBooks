@@ -186,7 +186,7 @@
 						<td class="ADDRESS" align="center" >地址</td>
 						<td class="RID" align="center">权限</td>
 						<td class="INTERESTS" align="center">兴趣</td>
-						<td class="DELETE" align="center" colspan="3">操作</td>
+				
 					</tr>
 					<s:iterator value="list" var="u">
 						<tr bgcolor="white">
@@ -226,10 +226,7 @@
 								<s:property value="#u.interests"/>
 								</p>
 							</td>
-							<td align="center" class="DELETE">
-							<a class="delete" href="${pageContext.request.contextPath }/user_delete?uid=<s:property value="#u.uid" />&curPage=<s:property value="curPage" />">删除</a>
-							<a href="${pageContext.request.contextPath }/book_AdminUpdate?bid=<s:property value="#b.bid" />">修改</a>
-							<a href="">查看</a></td>
+							
 						</tr>
 					</s:iterator>		
 				</table>

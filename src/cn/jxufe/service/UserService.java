@@ -54,12 +54,22 @@ public class UserService {
 		user.getBooks().remove(book);
 		userdao.update(user);
 	}
+	public User findByid(Integer uid) {
+		
+		return userdao.get(uid);
+	}
 	
 	public User updateAdminBook(User user) {
 		Role role = roleDao.get(3);
 		user.setRole(role);
 		userdao.update(user);
 		return userdao.get(user.getUid());
+	}
+
+	public void useradmin_update(User user,int rid) {
+		Role role = roleDao.get(rid);
+		user.setRole(role);
+		userdao.update(user);
 	}
 	public PageBean<User> findByPage(Integer curPage) {
 		PageBean<User> pageBean = new PageBean<User>();

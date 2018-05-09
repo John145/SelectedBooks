@@ -38,8 +38,9 @@
     		<result name="delete">/admin/Useradmin_deletesuccess.jsp</result>
     		<result name="findAll_register">/admin/Useradmin_register.jsp</result>
     		<result name="findAll_bookadmin">/admin/Useradmin_bookadmin.jsp</result>
-    		<result name="update">/user/updateUser.jsp</result>
+    		<result name="updateadmin">/admin/useradmin_update.jsp</result>
     		<result name="collection">/user/collection.jsp</result>
+    		<result name="update_admin">/admin/success.jsp</result>
     	</action>
     	<action name="checkCode" class="checkCodeAction"></action>
     	

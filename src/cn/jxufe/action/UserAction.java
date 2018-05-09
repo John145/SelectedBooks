@@ -20,6 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.jxufe.domain.Book;
+import cn.jxufe.domain.BookAndLike;
 import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.Role;
 import cn.jxufe.domain.User;
@@ -109,6 +110,31 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		userService.update(curUser);
 		this.addActionMessage("�޸ĳɹ�������");
 		return "update";
+	}
+	private String rid;
+	
+	
+	public String getRid() {
+		return rid;
+	}
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
+	public String updateadmin() {
+		int uid = user.getUid();
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		ActionContext.getContext().getValueStack().push(curUser);
+		User user = userService.findByid(uid);
+		ActionContext.getContext().getSession().put("user", user);
+		return "updateadmin";
+	}
+	public String update_admin() {
+		//锟睫革拷锟斤拷锟斤拷锟矫伙拷锟斤拷息
+		System.out.println(rid);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		ActionContext.getContext().getValueStack().push(curUser);
+		userService.useradmin_update(user, Integer.parseInt(rid));
+		return "update_admin";
 	}
 	public String chooseInterest() {
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");

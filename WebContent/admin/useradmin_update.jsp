@@ -167,87 +167,18 @@
 			</div>
 		</div>
 		<div id="right">
-			<div id="search">
-				<s:form action="book_search" method="get" theme="simple">
-					
-					<input name="curPage" type="hidden" value="1">
-					<s:textfield name="keyword" placeholder="书名/作者/类型" style="height: 20px;  border: 1px soile black;"></s:textfield>
-					<input type="submit" value="搜索"  style="height: 25px;">
-				</s:form>
-			</div>
-			<div id="outer">
-				<table border="1" cellspacing="0" class="TABLE">
-					<tr>
-						<td class="UID" align="center">用户ID</td>
-						<td class="USERNAME" align="center" >用户名</td>
-						<td class="SEX" align="center" >用户性别</td>
-						<td class="NICKNAME" align="center" >昵称</td>
-						<td class="EMAIL" align="center" >电子邮箱</td>
-						<td class="ADDRESS" align="center" >地址</td>
-						<td class="RID" align="center">权限</td>
-						<td class="INTERESTS" align="center">兴趣</td>
-						<td class="DELETE" align="center" colspan="3">操作</td>
-					</tr>
-					<s:iterator value="list" var="u">
-						<tr bgcolor="white">
-							<td align="center" class="UID">
-								<s:property value="#u.uid"/>
-							</td>
-							<td align="center" class="USERNAME">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.username"/>
-								</p>
-							</td>
-							<td align="center" class="SEX">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.sex"/>
-								</p>
-							</td>
-							<td align="center" class="NICKNAME">
-								<p style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.nickname"/>
-								</p>
-							</td>
-							<td align="center" class="EMAIL">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.email"/>
-								</p>
-							</td>
-							<td align="center" class="ADDRESS">
-								<s:property value="#u.address"/>
-							</td>
-							<td align="center" class="RID">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.role.rname"/>
-								</p>
-							</td>
-							<td align="center"  class="INTERESTS">
-								<p style="width:20px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.interests"/>
-								</p>
-							</td>
-							<td align="center" class="DELETE">
-							<a class="delete" href="${pageContext.request.contextPath }/user_delete?uid=<s:property value="#u.uid" />&curPage=<s:property value="curPage" />">删除</a>
-							<a href="${pageContext.request.contextPath }/user_updateadmin?uid=<s:property value="#u.uid" />&keyrid=<s:property value="#u.Role.rid" />">修改</a>
-							<a href="">查看</a></td>
-						</tr>
-					</s:iterator>	
-				</table>
-			</div>
-			<div id="showPage">
-				<span>&nbsp;&nbsp;第<s:property value="curPage"/>/<s:property value="totalPage"/>页</span>
-				<span>总记录数：<s:property value="totalCount"/></span>
-				<span>
-					<s:if test="curPage != 1">
-						<a href="${pageContext.request.contextPath }/user_findAll?curPage=1">[首页]</a>
-						<a href="${pageContext.request.contextPath }/user_findAll?curPage=<s:property value="curPage-1" />">[上一页]</a>
-					</s:if>
-					<s:if test="curPage != totalPage && totalPage != 0">
-						<a href="${pageContext.request.contextPath }/user_findAll?curPage=<s:property value="curPage+1" />">[下一页]</a>
-						<a href="${pageContext.request.contextPath }/user_findAll?curPage=<s:property value="totalPage" />">[尾页]</a>
-					</s:if>
-				</span>
-			</div>
+			<form action="user_update_admin?keyrid=<s:property value="#session.user.Role.rid"/>">
+			序号：<s:property value="#session.user.uid"/><br><br>
+			<input type="hidden" name="uid" value="<s:property value="#session.user.uid"/>" />
+			用户名：<input name="username" value="<s:property value="#session.user.username"/>"><br><br>
+			<input type="hidden" name="password" value="<s:property value="#session.user.password"/>">
+			性别：<input name="sex" value="<s:property value="#session.user.sex"/>"><br><br>
+			昵称：<input name="nickname" value="<s:property value="#session.user.nickname"/>"><br><br>
+			邮箱：<input name="email" value="<s:property value="#session.user.email"/>"><br><br>
+			地址：<input name="address" value="<s:property value="#session.user.address"/>"><br><br>
+			<input type="hidden" name="rid" value="<s:property value="#session.user.Role.rid"/>">
+			<input type="submit" value="提交"/>
+		</form>
 		</div>
 	</div>
 
