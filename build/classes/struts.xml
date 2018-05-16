@@ -20,6 +20,10 @@
     	
     	<!-- userAction -->
     	<action name="user_*" class="userAction" method="{1}">
+    		<interceptor-ref name="defaultStack"></interceptor-ref>
+    		<interceptor-ref name="myLoginInterceptor">
+    			<param name="excludeMethods">login</param>
+    		</interceptor-ref>
     		<result name="input">/index.jsp</result>
     		<result name="success" type="redirectAction">book_selected</result>
     		<result name="logout" type="redirect">/user/logout.jsp</result>
