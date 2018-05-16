@@ -41,117 +41,71 @@
 		.source dt{background-image:url(images/left/source.png)}
 		.statistics dt{background-image:url(images/left/statistics.png)}
 		.leftsidebar_box dl dd:last-child{padding-bottom:10px;}
+		input{
+			width: 200px;
+			height: 20px;
+		}
 	</style>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('.delete').click(function(){
-				var tag = confirm("是否删除"+$(this).parent().parent().find('.bookName').text());
-				if(tag){
-					return true;
-				}
-				return false;
-			});
-			$('.location').ready(function(){
-				$(this).find('#weizhi').text("首页");			
-			});
 		});
-	</script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery.js"></script>
-	<script type="text/javascript">
-	$(".leftsidebar_box dt").css({"background-color":"black"});
-	$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-	$(function(){
-		$(".leftsidebar_box dd").hide();
-		$(".leftsidebar_box dt").click(function(){
-			$(".leftsidebar_box dt").css({"background-color":"black"})
-			$(this).css({"background-color": "black"});
-			$(this).parent().find('dd').removeClass("menu_chioce");
-			$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-			$(this).parent().find('img').attr("src","images/left/select_xl.png");
-			$(".menu_chioce").slideUp(); 
-			$(this).parent().find('dd').slideToggle();
-			$(this).parent().find('dd').addClass("menu_chioce");
-		});
-	})
+		function validate(){
+			$('form').submit();
+		}
+		//菜单动画
+		$(".leftsidebar_box dt").css({"background-color":"black"});
+		$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+		$(function(){
+			$(".leftsidebar_box dd").hide();
+			$(".leftsidebar_box dt").click(function(){
+				$(".leftsidebar_box dt").css({"background-color":"black"})
+				$(this).css({"background-color": "black"});
+				$(this).parent().find('dd').removeClass("menu_chioce");
+				$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+				$(this).parent().find('img').attr("src","images/left/select_xl.png");
+				$(".menu_chioce").slideUp(); 
+				$(this).parent().find('dd').slideToggle();
+				$(this).parent().find('dd').addClass("menu_chioce");
+			});
+		})
 	</script>
 </head>
 <body>
 	<div id="big">
 		<jsp:include page="top.jsp"></jsp:include>
-		<div id="left">
-			<div class="leftsidebar_box">
-			<div class="line"></div>
-
-			<dl class="custom">
-				<dt onClick="changeImage()">书籍管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_Adminadd">增加书籍</a></dd>
-				<dd><a href="#">删除书籍</a></dd>
-				<dd><a href="#">修改书籍</a></dd>
-				<dd><a href="#">查询书籍</a></dd>
-			</dl>
-			
-			<dl class="channel">
-				<dt onClick="changeImage()">个人信息<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
-				<dd><a href="#">渠道标准管理</a></dd>
-				<dd><a href="#">系统通知</a></dd>
-				<dd><a href="#">渠道商管理</a></dd>
-				<dd><a href="#">渠道商链接</a></dd>
-			</dl>
-			
-			<dl class="app">
-				<dt onClick="changeImage()">APP管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">App运营商管理</a></dd>
-				<dd><a href="#">开放接口管理</a></dd>
-				<dd><a href="#">接口类型管理</a></dd>
-			</dl>
-			
-			<dl class="cloud">
-				<dt>大数据云平台<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">平台运营商管理</a></dd>
-			</dl>
-			
-			<dl class="syetem_management">
-				<dt>系统管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">后台用户管理</a></dd>
-				<dd><a href="#">角色管理</a></dd>
-				<dd><a href="#">客户类型管理</a></dd>
-				<dd><a href="#">栏目管理</a></dd>
-				<dd><a href="#">微官网模板组管理</a></dd>
-				<dd><a href="#">商城模板管理</a></dd>
-				<dd><a href="#">微功能管理</a></dd>
-				<dd><a href="#">修改用户密码</a></dd>
-			</dl>
-			
-			<dl class="source">
-				<dt>素材库管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">图片库</a></dd>
-				<dd><a href="#">链接库</a></dd>
-				<dd><a href="#">推广管理</a></dd>
-			</dl>
-			
-			<dl class="statistics">
-				<dt>统计分析<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">客户统计</a></dd>
-			</dl>
-			
-			<!--  <a href="${pageContext.request.contextPath }/book_Adminadd">增加5</a><br />-->
-			</div>
-		</div>
+		<s:include value="bookAdminLeft.jsp"></s:include>
 		<div id="right">
-			<form action="user_informationupdate">
-			基本资料：<br><br>
-			序号：<s:property value="uid"/><br><br>
-			<input type="hidden" name="uid" value="<s:property value="uid"/>" />
-			用户名：<input name="username" value="<s:property value="username"/>"><br><br>
-			<input type="hidden" name="password" value="<s:property value="password"/>">
-			性别：<input name="sex" value="<s:property value="sex"/>"><br><br>
-			昵称：<input name="nickname" value="<s:property value="nickname"/>"><br><br>
-			邮箱：<input name="email" value="<s:property value="email"/>"><br><br>
-			地址：<input name="address" value="<s:property value="address"/>"><br><br>
-			<input type="hidden" name="rid" value="<s:property value="Role.rid"/>">
-			<input type="submit" value="提交"/>
+			<h3 style="text-align: center; margin-top: 20px;">基本信息修改</h3>
+			<form action="user_informationupdate" method="post">
+				<table style="margin-top: 50px;">
+					<tr>
+						<td>用户名：</td>
+						<td><input name="username" value="<s:property value="username"/>"></td>
+					</tr>
+					<tr>
+						<td>性别：</td>
+						<td><input name="sex" value="<s:property value="sex"/>"></td>
+					</tr>
+					<tr>
+						<td>昵称：</td>
+						<td><input name="nickname" value="<s:property value="nickname"/>"></td>
+					</tr>
+					<tr>
+						<td>邮箱：</td>
+						<td><input name="email" value="<s:property value="email"/>"></td>
+					</tr>
+					<tr>
+						<td>地址：</td>
+						<td><input name="address" value="<s:property value="address"/>"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div onclick="validate()" style="background: #3fa156; text-align:center; line-height: 35px; width: 85px;height: 35px;border-radius: 5px;color: white;">修改</div>
+						</td>
+					</tr>
+				</table>
+				
 		</form>
 		</div>
 	</div>

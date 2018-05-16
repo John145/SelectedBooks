@@ -11,6 +11,7 @@
 			margin: auto;
 		}
 		#top{
+			margin-top:50px;
 			width: 1260px;
 			height: 60px;
 			background: rgb(8,162,186);
@@ -25,27 +26,24 @@
 			height: 60px;
 			float: left;
 
-		}		
+		}
+		#operation div{
+			text-align: center;
+			line-height: 60px;
+		}	
 		#Username{
-			width:98px;
 			height:28px;
 			float: left; 
-			border: 1px solid black; 
-			padding-top: 30px;
 		}
 		#refresh{
 			width:98px;
 			height:28px;
 			float: left; 
-			border: 1px solid black; 
-			padding-top: 30px;
 		}
 		#logout{
 			width:98px;
 			height:28px;
 			float: left; 
-			border: 1px solid black; 
-			padding-top: 30px;
 		}
 		p{
 			padding-top:20px;
@@ -59,20 +57,14 @@
 	<div id="top">
 	
 		<div id="logo">	
-			<p style="color: white;">书籍后台管理系统</p>
+			<p style="color: white;"><a href="${pageContext.request.contextPath }/book_findAll?curPage=1">书籍后台管理系统</a></p>
 		</div>
 		<div id="operation">
 			<div id="Username">
-				您好：<s:property value="#session.curUser.nickname"/>		
+				您好：<a href="${pageContext.request.contextPath }/user_personalinformation"><s:property value="#session.curUser.nickname"/></a>		
 			</div>
-			
-			<div id="refresh">
-				刷新
-			</div>
-			
 			<div id="logout">
 				<a href="${pageContext.request.contextPath }/user/user_logout">注销</a>
-				<a href="${pageContext.request.contextPath }/index.jsp">刷新</a>
 			</div>
 		</div>
 		

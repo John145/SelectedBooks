@@ -97,7 +97,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "ajax-success";
 	}
 	/**
-	 * �޸��û���Ϣ
+	 * 修改个人信息
 	 * @return
 	 */
 	public String update() {
@@ -108,7 +108,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		curUser.setAddress(user.getAddress());
 		curUser.setInterests(user.getInterests());
 		userService.update(curUser);
-		this.addActionMessage("�޸ĳɹ�������");
+		this.addActionMessage("修改成功！！！");
 		return "update";
 	}
 	private String rid;
@@ -122,18 +122,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	}
 	public String updateadmin() {
 		int uid = user.getUid();
-		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
-		ActionContext.getContext().getValueStack().push(curUser);
 		User user = userService.findByid(uid);
 		ActionContext.getContext().getSession().put("user", user);
 		return "updateadmin";
 	}
 	public String update_admin() {
-		//锟睫革拷锟斤拷锟斤拷锟矫伙拷锟斤拷息
-		System.out.println(rid);
-		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
-		ActionContext.getContext().getValueStack().push(curUser);
-		userService.useradmin_update(user, Integer.parseInt(rid));
+		userService.useradmin_update(user);
 		return "update_admin";
 	}
 	public String chooseInterest() {
@@ -239,9 +233,13 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	}
 	public String informationupdate() {
 		//锟睫革拷锟斤拷锟斤拷锟矫伙拷锟斤拷息
-		User usernew = new User();
-		usernew = userService.updateAdminBook(user);
-		ActionContext.getContext().getSession().put("curUser", user);
+		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
+		curUser.setUsername(user.getUsername());
+		curUser.setSex(user.getSex());
+		curUser.setNickname(user.getNickname());
+		curUser.setEmail(user.getEmail());
+		curUser.setAddress(user.getAddress());
+		userService.updateAdminBook(curUser);
 		return "informationupdate";
 	}
 	private Integer curPage;
@@ -251,8 +249,6 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	public String findAll() {
 		PageBean<User> pageBean = userService.findByPage(curPage);
 		ActionContext.getContext().getValueStack().push(pageBean);
-		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
-		ActionContext.getContext().getValueStack().push(curUser);
 		return "findAll";
 	}
 	public String findAll_register() {
@@ -270,10 +266,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "findAll_bookadmin";
 	}
 	public String delete() {
-		System.out.println(user.getUid());
-		PageBean<User> pageBean = userService.delByKeyword(user.getUid(),curPage);
-		ActionContext.getContext().getValueStack().push(pageBean);
-		System.out.println("delete()");
+		userService.delete(user);
 		return "delete";
 	}
 	

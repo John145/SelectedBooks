@@ -46,7 +46,6 @@
 		.TABLE p{
 			padding:0px;
 			margin:0px;
-			height: 15px;
 			font-size: 15px;
 		}
 		.ID{
@@ -146,66 +145,7 @@
 <body>
 	<div id="big">
 		<jsp:include page="top.jsp"></jsp:include>
-		<div id="left">
-			<div class="leftsidebar_box">
-			<div class="line"></div>
-
-			<dl class="custom">
-				<dt onClick="changeImage()">书籍管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_Adminadd">增加书籍</a></dd>
-				<dd><a href="#">删除书籍</a></dd>
-				<dd><a href="#">修改书籍</a></dd>
-				<dd><a href="#">查询书籍</a></dd>
-			</dl>
-			
-			<dl class="channel">
-				<dt onClick="changeImage()">个人信息<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
-				<dd><a href="#">渠道标准管理</a></dd>
-				<dd><a href="#">系统通知</a></dd>
-				<dd><a href="#">渠道商管理</a></dd>
-				<dd><a href="#">渠道商链接</a></dd>
-			</dl>
-			
-			<dl class="app">
-				<dt onClick="changeImage()">APP管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">App运营商管理</a></dd>
-				<dd><a href="#">开放接口管理</a></dd>
-				<dd><a href="#">接口类型管理</a></dd>
-			</dl>
-			
-			<dl class="cloud">
-				<dt>大数据云平台<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">平台运营商管理</a></dd>
-			</dl>
-			
-			<dl class="syetem_management">
-				<dt>系统管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">后台用户管理</a></dd>
-				<dd><a href="#">角色管理</a></dd>
-				<dd><a href="#">客户类型管理</a></dd>
-				<dd><a href="#">栏目管理</a></dd>
-				<dd><a href="#">微官网模板组管理</a></dd>
-				<dd><a href="#">商城模板管理</a></dd>
-				<dd><a href="#">微功能管理</a></dd>
-				<dd><a href="#">修改用户密码</a></dd>
-			</dl>
-			
-			<dl class="source">
-				<dt>素材库管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">图片库</a></dd>
-				<dd><a href="#">链接库</a></dd>
-				<dd><a href="#">推广管理</a></dd>
-			</dl>
-			
-			<dl class="statistics">
-				<dt>统计分析<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">客户统计</a></dd>
-			</dl>
-			
-			<!--  <a href="${pageContext.request.contextPath }/book_Adminadd">增加5</a><br />-->
-			</div>
-		</div>
+		<s:include value="bookAdminLeft.jsp"></s:include>
 		<div id="right">
 			<div id="search">
 				<s:form action="book_search" method="get" theme="simple">
@@ -267,7 +207,6 @@
 							<td align="center" class="DELETE">
 							<a class="delete" href="${pageContext.request.contextPath }/book_delete?bid=<s:property value="#b.bid" />&curPage=<s:property value="curPage" />">删除</a>
 							<a href="${pageContext.request.contextPath }/book_AdminUpdate?bid=<s:property value="#b.bid" />">修改</a>
-							<a href="">查看</a></td>
 						</tr>
 					</s:iterator>
 				</table>

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-修改成功
+	修改成功
+	<a href="${pageContext.request.contextPath }/user_findAll?curPage=1">返回</a>
 </body>
 </html>

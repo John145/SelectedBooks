@@ -59,17 +59,18 @@ public class UserService {
 		return userdao.get(uid);
 	}
 	
-	public User updateAdminBook(User user) {
-		Role role = roleDao.get(3);
-		user.setRole(role);
+	public void updateAdminBook(User user) {
 		userdao.update(user);
-		return userdao.get(user.getUid());
 	}
 
-	public void useradmin_update(User user,int rid) {
-		Role role = roleDao.get(rid);
-		user.setRole(role);
-		userdao.update(user);
+	public void useradmin_update(User user) {
+		User tmp = userdao.get(user.getUid());
+		tmp.setUsername(user.getUsername());
+		tmp.setSex(user.getSex());
+		tmp.setNickname(user.getNickname());
+		tmp.setEmail(user.getEmail());
+		tmp.setAddress(user.getAddress());
+		userdao.update(tmp);
 	}
 	public PageBean<User> findByPage(Integer curPage) {
 		PageBean<User> pageBean = new PageBean<User>();
@@ -130,27 +131,8 @@ public class UserService {
 		pageBean.setList(users);//blm000222
 		return pageBean;
 	}
-	
-	public PageBean<User> delByKeyword(Integer uid, Integer curPage) {
-		PageBean<User> pageBean = new PageBean<User>();
-		//锟斤拷前页锟斤拷
-		pageBean.setCurPage(curPage);
-		//每页锟斤拷示锟斤拷锟斤拷锟斤拷锟斤拷录
-		int pageSize = 10;
-		pageBean.setPageSize(pageSize);
-		
-		//删锟斤拷锟斤拷锟斤拷
-		userdao.delCountByKeyword(uid);
-		
-		int totalCount = userdao.findCount();
-		//锟斤拷页锟斤拷
-		int num =(int)Math.ceil((double)totalCount / pageSize);
-		pageBean.setTotalPage(num);
-		//每页锟斤拷示锟斤拷锟斤拷锟斤拷
-		int begin = (curPage - 1) * pageSize;
-		List<User> users = userdao.findByPage(begin,pageSize);
-		pageBean.setList(users);//blm000222
-		return pageBean;
+	public void delete(User user) {
+		userdao.delete(user);
 	}
 	/**
 	 * ��ȡ�ղص��鼮

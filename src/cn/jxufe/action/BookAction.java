@@ -119,10 +119,11 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	
 
 	public String delete() {
-		System.out.println(book.getBid());
-		PageBean<Book> pageBean = bookService.delByKeyword(book.getBid(),curPage);
-		ActionContext.getContext().getValueStack().push(pageBean);
-		System.out.println("delete()");
+		bookService.delete(book);
+//		System.out.println(book.getBid());
+//		PageBean<Book> pageBean = bookService.delByKeyword(book.getBid(),curPage);
+//		ActionContext.getContext().getValueStack().push(pageBean);
+//		System.out.println("delete()");
 		return "delete";
 	}
 	public String detail() {
@@ -149,6 +150,10 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		return "Adminadd";
 	}
 	public String add() {
+		//判断书本是否为空数据，否则不让增加
+		
+		book.setClickNumber(0);
+		book.setTags("");
 		bookService.add(book);
 		return "add";
 	}

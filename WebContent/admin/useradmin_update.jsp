@@ -167,7 +167,7 @@
 			</div>
 		</div>
 		<div id="right">
-			<form action="user_update_admin?keyrid=<s:property value="#session.user.Role.rid"/>">
+			<form action="user_update_admin?keyrid=<s:property value="#session.user.Role.rid"/>" method="post">
 			序号：<s:property value="#session.user.uid"/><br><br>
 			<input type="hidden" name="uid" value="<s:property value="#session.user.uid"/>" />
 			用户名：<input name="username" value="<s:property value="#session.user.username"/>"><br><br>
@@ -176,7 +176,6 @@
 			昵称：<input name="nickname" value="<s:property value="#session.user.nickname"/>"><br><br>
 			邮箱：<input name="email" value="<s:property value="#session.user.email"/>"><br><br>
 			地址：<input name="address" value="<s:property value="#session.user.address"/>"><br><br>
-			<input type="hidden" name="rid" value="<s:property value="#session.user.Role.rid"/>">
 			<input type="submit" value="提交"/>
 		</form>
 		</div>

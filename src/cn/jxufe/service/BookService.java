@@ -154,7 +154,6 @@ public class BookService {
 		bookDao.update(book);
 	}
 	public void add(Book book) {
-		// TODO Auto-generated method stub
 		bookDao.add(book);
 	}
 	public void addMessageBoard(MessageBoard messageBoard, Integer bid, Integer uid) {
@@ -163,5 +162,8 @@ public class BookService {
 		Book book = bookDao.findById(bid);
 		messageBoard.setBook(book);
 		messageBoardDao.save(messageBoard);
+	}
+	public void delete(Book book) {
+		bookDao.delete(book);
 	}
 }

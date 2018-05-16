@@ -63,7 +63,7 @@
 							<s:iterator value="list" var="b">
 								<div class="row">
 									<div class="col-md-2 col-xs-6">
-										<img class="img-responsive" src="<s:property value="#b.picUrl"/>" />
+										<img style="width: 100%; height: auto;" src="<s:property value="#b.picUrl"/>" />
 									</div>
 									<div class="col-md-10">
 										<div class="bookInfo">

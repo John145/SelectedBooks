@@ -5,6 +5,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name=referrer content="never">
 	<title>Insert title here</title>
 	<style type="text/css">
 		#big{
@@ -13,7 +14,7 @@
 		}
 		#left{
 			width: 160px;
-			height: 500px;
+			height: 800px;
 			float: left;
 			background: blue;
 		}
@@ -41,124 +42,130 @@
 		.source dt{background-image:url(images/left/source.png)}
 		.statistics dt{background-image:url(images/left/statistics.png)}
 		.leftsidebar_box dl dd:last-child{padding-bottom:10px;}
+		table{
+			display: inline-block;
+			margin-left: 80px;
+		}
+		#img_full{
+			width: 300px;
+			height: 385px;
+			cursor: pointer;
+		}
+		form{
+			padding-top: 30px;
+			padding-left: 200px;
+		}
+		textarea{
+			width: 640px;
+			height: 100px;
+			font-size: 1.2em;
+			resize: none;
+		}
 	</style>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.delete').click(function(){
-				var tag = confirm("是否删除"+$(this).parent().parent().find('.bookName').text());
-				if(tag){
-					return true;
-				}
-				return false;
+		$(".leftsidebar_box dt").css({"background-color":"black"});
+		$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+		$(function(){
+			$(".leftsidebar_box dd").hide();
+			$(".leftsidebar_box dt").click(function(){
+				$(".leftsidebar_box dt").css({"background-color":"black"})
+				$(this).css({"background-color": "black"});
+				$(this).parent().find('dd').removeClass("menu_chioce");
+				$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+				$(this).parent().find('img').attr("src","images/left/select_xl.png");
+				$(".menu_chioce").slideUp(); 
+				$(this).parent().find('dd').slideToggle();
+				$(this).parent().find('dd').addClass("menu_chioce");
 			});
-			$('.location').ready(function(){
-				$(this).find('#weizhi').text("首页");			
-			});
-		});
-	</script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/scripts/jquery.js"></script>
-	<script type="text/javascript">
-	$(".leftsidebar_box dt").css({"background-color":"black"});
-	$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-	$(function(){
-		$(".leftsidebar_box dd").hide();
-		$(".leftsidebar_box dt").click(function(){
-			$(".leftsidebar_box dt").css({"background-color":"black"})
-			$(this).css({"background-color": "black"});
-			$(this).parent().find('dd').removeClass("menu_chioce");
-			$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-			$(this).parent().find('img').attr("src","images/left/select_xl.png");
-			$(".menu_chioce").slideUp(); 
-			$(this).parent().find('dd').slideToggle();
-			$(this).parent().find('dd').addClass("menu_chioce");
-		});
-	})
+		})
+		//提交表单
+		function validate(){
+			$('form').submit();
+		}
 	</script>
 </head>
 <body>
 	<div id="big">
 		<jsp:include page="top.jsp"></jsp:include>
-		<div id="left">
-			<div class="leftsidebar_box">
-			<div class="line"></div>
-
-			<dl class="custom">
-				<dt onClick="changeImage()">书籍管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_Adminadd">增加书籍</a></dd>
-				<dd><a href="#">删除书籍</a></dd>
-				<dd><a href="#">修改书籍</a></dd>
-				<dd><a href="#">查询书籍</a></dd>
-			</dl>
-			
-			<dl class="channel">
-				<dt onClick="changeImage()">个人信息<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
-				<dd><a href="#">渠道标准管理</a></dd>
-				<dd><a href="#">系统通知</a></dd>
-				<dd><a href="#">渠道商管理</a></dd>
-				<dd><a href="#">渠道商链接</a></dd>
-			</dl>
-			
-			<dl class="app">
-				<dt onClick="changeImage()">APP管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">App运营商管理</a></dd>
-				<dd><a href="#">开放接口管理</a></dd>
-				<dd><a href="#">接口类型管理</a></dd>
-			</dl>
-			
-			<dl class="cloud">
-				<dt>大数据云平台<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">平台运营商管理</a></dd>
-			</dl>
-			
-			<dl class="syetem_management">
-				<dt>系统管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">后台用户管理</a></dd>
-				<dd><a href="#">角色管理</a></dd>
-				<dd><a href="#">客户类型管理</a></dd>
-				<dd><a href="#">栏目管理</a></dd>
-				<dd><a href="#">微官网模板组管理</a></dd>
-				<dd><a href="#">商城模板管理</a></dd>
-				<dd><a href="#">微功能管理</a></dd>
-				<dd><a href="#">修改用户密码</a></dd>
-			</dl>
-			
-			<dl class="source">
-				<dt>素材库管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">图片库</a></dd>
-				<dd><a href="#">链接库</a></dd>
-				<dd><a href="#">推广管理</a></dd>
-			</dl>
-			
-			<dl class="statistics">
-				<dt>统计分析<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="#">客户统计</a></dd>
-			</dl>
-			
-			<!--  <a href="${pageContext.request.contextPath }/book_Adminadd">增加5</a><br />-->
-			</div>
-		</div>
+		<s:include value="bookAdminLeft.jsp"></s:include>
 		<div id="right">
-			<form action="book_update">
-			序号：<s:property value="bid"/><br>
-			<input type="hidden" name="bid" value="<s:property value="bid"/>" />
-			书名：<input name="bookName" value="<s:property value="bookName"/>"><br>
-			作者：<input name="author" value="<s:property value="author"/>"><br>
-			价格：<input name="price" value="<s:property value="price"/>"><br>
-			出版社：<input name="publisher" value="<s:property value="publisher"/>"><br>
-			出版时间：<input name="publishYear" value="<s:property value="publishYear"/>"><br>
-			翻译人：<input name="translator" value="<s:property value="translator"/>"><br>
-			全书页码：<input name="pages" value="<s:property value="pages"/>"><br>
-			评分：<input name="score" value="<s:property value="score"/>"><br>
-			评价人数：<input name="assessNumber" value="<s:property value="assessNumber"/>"><br>
-			读书连接：<input name="readUrl" value="<s:property value="readUrl"/>"><br>
-			内容介绍：<input name="contentIntroduce" value="<s:property value="contentIntroduce"/>"><br>
-			作者介绍：<input name="authorIntroduce" value="<s:property value="authorIntroduce"/>"><br>
-			分类：<input name="tags" value="<s:property value="tags"/>"><br>
-			图片：<img alt='' height="100px" src="<s:property value="picUrl"/>"/><a href="#">修改</a><br>
-			<input type="hidden" name="picUrl" value="<s:property value="picUrl"/>" />
-			<input type="submit" value="修改"/>
+			<form action="book_update" method="post">
+				<input type="hidden" name="bid" value="<s:property value="bid"/>" />
+				<div style="display: inline-block; float:left;"><img id="img_full" height="100px" src="<s:property value="picUrl"/>"/></div>
+				<table>
+					<tr>
+						<td>序号：</td>
+						<td><s:property value="bid"/></td>
+					</tr>
+					<tr>
+						<td>书名：</td>
+						<td><input name="bookName" value="<s:property value="bookName"/>"></td>
+					</tr>
+					<tr>
+						<td>作者：</td>
+						<td><input name="author" value="<s:property value="author"/>"></td>
+					</tr>
+					<tr>
+						<td>翻译人：</td>
+						<td><input name="translator" value="<s:property value="translator"/>"></td>
+					</tr>
+					<tr>
+						<td>价格：</td>
+						<td><input name="price" value="<s:property value="price"/>"></td>
+					</tr>
+					<tr>
+						<td>出版社：</td>
+						<td><input name="publisher" value="<s:property value="publisher"/>"></td>
+					</tr>
+					<tr>
+						<td>出版时间：</td>
+						<td><input name="publishYear" value="<s:property value="publishYear"/>"></td>
+					</tr>
+					<tr>
+						<td>全书页码：</td>
+						<td><input name="pages" value="<s:property value="pages"/>"></td>
+					</tr>
+					<tr>
+						<td>评分：</td>
+						<td><input name="score" value="<s:property value="score"/>"></td>
+					</tr>
+					<tr>
+						<td>评价人数：</td>
+						<td><input name="assessNumber" value="<s:property value="assessNumber"/>"></td>
+					</tr>
+					
+					<tr>
+						<td>读书连接：</td>
+						<td><input name="readUrl" value="<s:property value="readUrl"/>"></td>
+					</tr>
+					<tr>
+						<td>分类：</td>
+						<td><input name="sort" value="<s:property value="sort"/>"></td>
+					</tr>
+					<tr>
+						<td>标签：</td>
+						<td><input name="tags" value="<s:property value="tags"/>"></td>
+					</tr>
+					<tr>
+						<td>图片：</td>
+						<td><input type="text" name="picUrl" value="<s:property value="picUrl"/>" /></td>
+					</tr>
+					<tr>
+						<td>点击量：</td>
+						<td><input name="clickNumber" value="<s:property value="clickNumber"/>"></td>
+					</tr>
+				</table>
+				<div>
+					<p style="padding-left: 0px;">内容介绍：</p>
+					<textarea name="contentIntroduce"><s:property value="contentIntroduce"/></textarea>
+				</div>
+				<div>
+					<p style="padding-left: 0px;">作者介绍：</p>
+					<textarea name="authorIntroduce"><s:property value="authorIntroduce"/></textarea>
+				</div>
+				<br>
+				<div onclick="validate()" style="background: #3fa156; text-align:center; line-height: 35px; width: 85px;height: 35px;border-radius: 5px;color: white;">修改</div>
 		</form>
 		</div>
 	</div>

@@ -46,7 +46,6 @@
 		.TABLE p{
 			padding:0px;
 			margin:0px;
-			height: 15px;
 			font-size: 15px;
 		}
 		.UID{
@@ -60,7 +59,7 @@
 		
 		.SEX{
 			height: 30px;
-			width: 100px;
+			width: 60px;
 		}
 		
 		.NICKNAME{
@@ -113,14 +112,11 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.delete').click(function(){
-				var tag = confirm("是否删除"+$(this).parent().parent().find('.bookName').text());
+				var tag = confirm("是否删除注册用户："+$(this).parent().parent().find('.nickname_p').text());
 				if(tag){
 					return true;
 				}
 				return false;
-			});
-			$('.location').ready(function(){
-				$(this).find('#weizhi').text("首页");			
 			});
 		});
 	</script>
@@ -146,26 +142,7 @@
 <body>
 	<div id="big">
 		<jsp:include page="Useradmintop.jsp"></jsp:include>
-		<div id="left">
-			<div class="leftsidebar_box">
-			<div class="line"></div>
-
-			<dl class="custom">
-				<dt onClick="changeImage()">用户管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_findAll_register?curPage=1">注册用户</a></dd>
-				<dd><a href="${pageContext.request.contextPath }/user_findAll_bookadmin?curPage=1">书籍管理员</a></dd>
-				<dd><a href="${pageContext.request.contextPath }/user_findAll?curPage=1">全部用户</a></dd>
-			</dl>
-			<dl class="channel">
-				<dt onClick="changeImage()">权限管理<img src="images/left/select_xl01.png"></dt>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
-				<dd><a href="#">渠道标准管理</a></dd>
-				<dd><a href="#">系统通知</a></dd>
-				<dd><a href="#">渠道商管理</a></dd>
-				<dd><a href="#">渠道商链接</a></dd>
-			</dl>
-			</div>
-		</div>
+		<s:include value="userAdminLeft.jsp"></s:include>
 		<div id="right">
 			<div id="search">
 				<s:form action="book_search" method="get" theme="simple">
@@ -180,7 +157,7 @@
 					<tr>
 						<td class="UID" align="center">用户ID</td>
 						<td class="USERNAME" align="center" >用户名</td>
-						<td class="SEX" align="center" >用户性别</td>
+						<td class="SEX" align="center" >性别</td>
 						<td class="NICKNAME" align="center" >昵称</td>
 						<td class="EMAIL" align="center" >电子邮箱</td>
 						<td class="ADDRESS" align="center" >地址</td>
@@ -199,14 +176,12 @@
 								</p>
 							</td>
 							<td align="center" class="SEX">
-								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+								<p style="width:30px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
 								<s:property value="#u.sex"/>
 								</p>
 							</td>
 							<td align="center" class="NICKNAME">
-								<p style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
-								<s:property value="#u.nickname"/>
-								</p>
+								<p class="nickname_p" style="width:150px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;"><s:property value="#u.nickname"/></p>
 							</td>
 							<td align="center" class="EMAIL">
 								<p style="width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
@@ -222,14 +197,14 @@
 								</p>
 							</td>
 							<td align="center"  class="INTERESTS">
-								<p style="width:20px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+								<p style="width:200px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
 								<s:property value="#u.interests"/>
 								</p>
 							</td>
 							<td align="center" class="DELETE">
-							<a class="delete" href="${pageContext.request.contextPath }/user_delete?uid=<s:property value="#u.uid" />&curPage=<s:property value="curPage" />">删除</a>
-							<a href="${pageContext.request.contextPath }/user_updateadmin?uid=<s:property value="#u.uid" />&keyrid=<s:property value="#u.Role.rid" />">修改</a>
-							<a href="">查看</a></td>
+								<a class="delete" href="${pageContext.request.contextPath }/user_delete?uid=<s:property value="#u.uid"/>">删除</a>
+								<a href="${pageContext.request.contextPath }/user_updateadmin?uid=<s:property value="#u.uid" />&keyrid=<s:property value="#u.Role.rid" />">修改</a>
+							</td>
 						</tr>
 					</s:iterator>	
 				</table>

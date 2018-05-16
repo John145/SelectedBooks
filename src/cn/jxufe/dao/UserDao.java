@@ -97,13 +97,8 @@ public class UserDao extends HibernateDaoSupport {
 	}
 	
 
-	public void delCountByKeyword(Integer uid) {
-
-		String hql = "delete from User where uid =" +uid+"";
-		System.out.println(hql);
-		User user = findById(uid);	
+	public void delete(User user) {
 		this.getHibernateTemplate().delete(user);
-		System.out.println("ɾ���ɹ�");
 	}
 
 	private User findById(Integer uid) {

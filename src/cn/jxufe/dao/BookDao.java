@@ -88,4 +88,8 @@ public class BookDao extends HibernateDaoSupport {
 	public void add(Book book) {
 		this.getHibernateTemplate().save(book);
 	}
+
+	public void delete(Book book) {
+		this.getHibernateTemplate().delete(book);
+	}
 }
