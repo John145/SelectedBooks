@@ -176,11 +176,11 @@
 			<div class="row">
 				<div class="col-md-5 ">
 					<h4 class="">热门推荐
-					<a href="#"><span class="label label-default"><s:property value="#session.curUser.interests.split('#')[0]"/></span></a>
-					<a href="#"><span class="label label-info"><s:property value="#session.curUser.interests.split('#')[1]"/></span></a>
-					<a href="#"><span class="label label-success"><s:property value="#session.curUser.interests.split('#')[2]"/></span></a>
-					<a href="#"><span class="label label-danger"><s:property value="#session.curUser.interests.split('#')[3]"/></span></a>
-					<a href="#"><span class="label label-primary"><s:property value="#session.curUser.interests.split('#')[4]"/></span></a>
+					<a href="${pageContext.request.contextPath }/book_searchBySort.action?curPage=1&sort=<s:property value="#session.curUser.interests.split('#')[0]"/>"><span class="label label-default"><s:property value="#session.curUser.interests.split('#')[0]"/></span></a>
+					<a href="${pageContext.request.contextPath }/book_searchBySort.action?curPage=1&sort=<s:property value="#session.curUser.interests.split('#')[1]"/>"><span class="label label-info"><s:property value="#session.curUser.interests.split('#')[1]"/></span></a>
+					<a href="${pageContext.request.contextPath }/book_searchBySort.action?curPage=1&sort=<s:property value="#session.curUser.interests.split('#')[2]"/>"><span class="label label-success"><s:property value="#session.curUser.interests.split('#')[2]"/></span></a>
+					<a href="${pageContext.request.contextPath }/book_searchBySort.action?curPage=1&sort=<s:property value="#session.curUser.interests.split('#')[3]"/>"><span class="label label-danger"><s:property value="#session.curUser.interests.split('#')[3]"/></span></a>
+					<a href="${pageContext.request.contextPath }/book_searchBySort.action?curPage=1&sort=<s:property value="#session.curUser.interests.split('#')[4]"/>"><span class="label label-primary"><s:property value="#session.curUser.interests.split('#')[4]"/></span></a>
 					</h4>
 				</div>
 	
@@ -189,7 +189,7 @@
 						<!--表单合组-->
 						<input name="curPage" type="hidden" value="1">
 						<div class="input-group">
-							<s:textfield name="keyword" cssClass="form-control" placeholder="书名/作者/类型"></s:textfield>
+							<s:textfield name="keyword" cssClass="form-control" placeholder="书名"></s:textfield>
 							<span class="input-group-btn">
 								<button class="btn btn-group-justified glyphicon glyphicon-search" type="button" onclick="$('form').submit()">
 								</button>

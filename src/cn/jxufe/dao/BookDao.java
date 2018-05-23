@@ -92,4 +92,20 @@ public class BookDao extends HibernateDaoSupport {
 	public void delete(Book book) {
 		this.getHibernateTemplate().delete(book);
 	}
+
+	public int findCountBySort(String sort) {
+		String hql = "select count(*) from Book where sort like ?";
+		List<Long> list = this.getHibernateTemplate().find(hql,"%"+sort+"%");
+		if(list.size() > 0) {
+			return list.get(0).intValue();
+		}
+		return 0;
+	}
+
+	public List<Book> findByPageAndSort(int begin, int pageSize, String sort) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.add(Restrictions.like("sort","%"+sort+"%"));
+		List<Book> list = this.getHibernateTemplate().findByCriteria(criteria,begin,pageSize);
+		return list;
+	}
 }

@@ -68,25 +68,22 @@ public class BookService {
 		pageBean.setList(books);//blm000222
 		return pageBean;
 	}
-	public PageBean<Book> delByKeyword(int bid, Integer curPage) {
-		// TODO Auto-generated method stub
+	public PageBean<Book> findBySort(String sort ,Integer curPage) {
 		PageBean<Book> pageBean = new PageBean<Book>();
 		//��ǰҳ��
 		pageBean.setCurPage(curPage);
 		//ÿҳ��ʾ��������¼
 		int pageSize = 10;
 		pageBean.setPageSize(pageSize);
-		
-		//ɾ������
-		bookDao.delCountByKeyword(bid);
-		
-		int totalCount = bookDao.findCount();
+		//�ܼ�¼��
+		int totalCount = bookDao.findCountBySort(sort);
+		pageBean.setTotalCount(totalCount);
 		//��ҳ��
 		int num =(int)Math.ceil((double)totalCount / pageSize);
 		pageBean.setTotalPage(num);
 		//ÿҳ��ʾ������
 		int begin = (curPage - 1) * pageSize;
-		List<Book> books = bookDao.findByPage(begin,pageSize);
+		List<Book> books = bookDao.findByPageAndSort(begin,pageSize,sort);
 		pageBean.setList(books);//blm000222
 		return pageBean;
 	}

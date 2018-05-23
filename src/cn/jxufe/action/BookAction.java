@@ -116,7 +116,15 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 			return "AdminSearch";
 		}
 	}
-	
+	/**
+	 * search the books by the sort of the book
+	 * @return
+	 */
+	public String searchBySort() {
+		PageBean<Book> pageBean = bookService.findBySort(book.getSort(), curPage);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return "searchBySort";
+	}
 
 	public String delete() {
 		bookService.delete(book);

@@ -97,10 +97,10 @@
 								<ul class="pagination" id="myul" style="display: block; text-align: center;">
 									<s:if test="curPage != 1">
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=1&keyword=<s:property value="keyword"/>">首页</a>
+											<a href="${pageContext.request.contextPath }/book_searchBySort?curPage=1&sort=<s:property value="sort"/>">首页</a>
 										</li>
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage-1" />&keyword=<s:property value="keyword"/>">上一页</a>
+											<a href="${pageContext.request.contextPath }/book_searchBySort?curPage=<s:property value="curPage-1" />&sort=<s:property value="sort"/>">上一页</a>
 										</li>
 									</s:if>
 										<li class="active">
@@ -108,10 +108,10 @@
 										</li>
 									<s:if test="curPage != totalPage && totalPage != 0">
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage+1" />&keyword=<s:property value="keyword"/>">下一页</a>
+											<a href="${pageContext.request.contextPath }/book_searchBySort?curPage=<s:property value="curPage+1" />&sort=<s:property value="sort"/>">下一页</a>
 										</li>
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="totalPage" />&keyword=<s:property value="keyword"/>">尾页</a>
+											<a href="${pageContext.request.contextPath }/book_searchBySort?curPage=<s:property value="totalPage" />&sort=<s:property value="sort"/>">尾页</a>
 										</li>
 									</s:if>
 								</ul>
@@ -152,6 +152,12 @@
 						}
 					}
 				}
+				//获取搜索框
+				var form = $('#form');
+				form.attr("action","${pageContext.request.contextPath}/book_searchBySort.action");
+				$($('#form input')[1]).attr("name","sort");
+				$($('#form input')[1]).attr("placeholder","类型");
+				$($('#form input')[1]).val('<s:property value="sort" />');
 			});
 			function add(type){
 				var node = $('<a href="${pageContext.request.contextPath}/book_searchBySort.action?curPage=1&sort='+type+'" class="interest">'+type+'</a>');
