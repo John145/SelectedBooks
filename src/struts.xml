@@ -22,7 +22,7 @@
     	<action name="user_*" class="userAction" method="{1}">
     		<interceptor-ref name="defaultStack"></interceptor-ref>
     		<interceptor-ref name="myLoginInterceptor">
-    			<param name="excludeMethods">login</param>
+    			<param name="excludeMethods">login,register</param>
     		</interceptor-ref>
     		<result name="input">/index.jsp</result>
     		<result name="success" type="redirectAction">book_selected</result>
