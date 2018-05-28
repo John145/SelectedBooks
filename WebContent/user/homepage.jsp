@@ -11,6 +11,7 @@
 			float: left;
 			padding-left: 15px;
 			padding-right: 15px;
+			margin-bottom: 20px;
 		}
 		.avg_show p{
 			font-size: 0.9em;
@@ -105,8 +106,10 @@
 			        	<div class="row">
 			        		<s:iterator value="books" var="b">
 			        			<div class="avg_show">
-				        			<img class="img-responsive" src='<s:property value="#b.picUrl"/>'>
-				        			<a style="overflow: hidden; white-space:nowrap; display: block; text-overflow: ellipsis;" href="book_detail?bid=<s:property value="#b.bid"/>"><s:property value="#b.bookName"/></a>
+				        			<a href="book_detail?bid=<s:property value="#b.bid"/>">
+				        				<img class="img-responsive" src='<s:property value="#b.picUrl"/>'>
+				        			</a>
+				        			<a style="overflow: hidden; white-space:nowrap; display: block; text-overflow: ellipsis; padding: 5px 0px;" href="book_detail?bid=<s:property value="#b.bid"/>"><s:property value="#b.bookName"/></a>
 									<p style="overflow: hidden; white-space:nowrap; display: block; text-overflow: ellipsis;" class="bookinfo"><s:property value="#b.author"/></p>
 				        		</div>
 			        		</s:iterator>

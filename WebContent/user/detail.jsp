@@ -237,7 +237,7 @@
 			}
 		});
 		function add(type){
-			var node = $('<a href="#" class="interest">'+type+'</a>');
+			var node = $('<a href="${pageContext.request.contextPath}/book_searchBySort.action?curPage=1&sort='+type+'" class="interest">'+type+'</a>');
 			if(node[0].innerHTML.length > 5){
 				node.css("width","150px");
 			}

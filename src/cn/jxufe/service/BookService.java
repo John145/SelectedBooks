@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.opensymphony.xwork2.ActionContext;
 
 import cn.jxufe.dao.BookDao;
@@ -49,7 +51,7 @@ public class BookService {
 		pageBean.setList(books);//blm000222
 		return pageBean;
 	}
-	public PageBean<Book> findByKeyword(String keyword ,Integer curPage) {
+	public PageBean<Book> findByKeyword(String keyword ,Integer curPage,DetachedCriteria criteria) {
 		PageBean<Book> pageBean = new PageBean<Book>();
 		//��ǰҳ��
 		pageBean.setCurPage(curPage);
@@ -64,7 +66,7 @@ public class BookService {
 		pageBean.setTotalPage(num);
 		//ÿҳ��ʾ������
 		int begin = (curPage - 1) * pageSize;
-		List<Book> books = bookDao.findByPageAndKeyword(begin,pageSize,keyword);
+		List<Book> books = bookDao.findByPageAndKeyword(begin,pageSize,criteria);
 		pageBean.setList(books);//blm000222
 		return pageBean;
 	}

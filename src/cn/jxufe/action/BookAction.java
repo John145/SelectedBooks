@@ -4,6 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -81,6 +85,9 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	public void setCurPage(Integer curPage) {
 		this.curPage = curPage;
 	}
+	public Integer getCurPage() {
+		return curPage;
+	}
 	
 	public String findAll() {
 		PageBean<Book> pageBean = bookService.findByPage(curPage);
@@ -107,7 +114,9 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		return keyword;
 	}
 	public String search() {
-		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage);
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.add(Restrictions.like("bookName","%"+keyword+"%"));
+		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage,criteria);
 		ActionContext.getContext().getValueStack().push(pageBean);
 		User user = (User) ActionContext.getContext().getSession().get("curUser");
 		if(user.getRole().getRname().equals("注册用户")){
@@ -115,6 +124,42 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		}else {
 			return "AdminSearch";
 		}
+	}
+	/**
+	 * search the book by the plisheryear
+	 * @return
+	 */
+	public String searchByNew() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.add(Restrictions.like("bookName","%"+keyword+"%"));
+		criteria.addOrder(Order.desc("publishYear"));
+		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage,criteria);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return "searchByNew";
+	}
+	/**
+	 * search the book by the score
+	 * @return
+	 */
+	public String searchByScore() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.add(Restrictions.like("bookName","%"+keyword+"%"));
+		criteria.addOrder(Order.desc("score"));
+		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage,criteria);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return "searchByScore";
+	}
+	/**
+	 * search the book by the price
+	 * @return
+	 */
+	public String searchByPrice() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.add(Restrictions.like("bookName","%"+keyword+"%"));
+		criteria.addOrder(Order.desc("price"));
+		PageBean<Book> pageBean = bookService.findByKeyword(keyword,curPage,criteria);
+		ActionContext.getContext().getValueStack().push(pageBean);
+		return "searchByPrice";
 	}
 	/**
 	 * search the books by the sort of the book

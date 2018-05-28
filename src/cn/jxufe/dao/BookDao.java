@@ -36,9 +36,7 @@ public class BookDao extends HibernateDaoSupport {
 		return 0;
 	}
 
-	public List<Book> findByPageAndKeyword(int begin, int pageSize,String keyword) {
-		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
-		criteria.add(Restrictions.like("bookName","%"+keyword+"%"));
+	public List<Book> findByPageAndKeyword(int begin, int pageSize,DetachedCriteria criteria) {
 		List<Book> list = this.getHibernateTemplate().findByCriteria(criteria,begin,pageSize);
 		return list;
 	}
@@ -70,8 +68,13 @@ public class BookDao extends HibernateDaoSupport {
 	 * @return
 	 */
 	public List<Book> findByType(String interest) {
-		String hql = "from Book where sort=? order by clickNumber desc";
-		List<Book> list = this.getHibernateTemplate().find(hql,interest);
+		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
+		criteria.add(Restrictions.eq("sort", interest));
+		criteria.addOrder(Order.desc("clickNumber"));
+		criteria.addOrder(Order.desc("publishYear"));
+		criteria.addOrder(Order.desc("score"));
+		criteria.addOrder(Order.desc("price"));
+		List<Book> list = this.getHibernateTemplate().findByCriteria(criteria);
 		return list;
 	}
 
@@ -81,6 +84,9 @@ public class BookDao extends HibernateDaoSupport {
 //		return list;
 		DetachedCriteria criteria = DetachedCriteria.forClass(Book.class);
 		criteria.addOrder(Order.desc("clickNumber"));
+		criteria.addOrder(Order.desc("publishYear"));
+		criteria.addOrder(Order.desc("score"));
+		criteria.addOrder(Order.desc("price"));
 		criteria.getExecutableCriteria(getSession()).setMaxResults(10);
 		List<Book> list = this.getHibernateTemplate().findByCriteria(criteria);
 		return list;

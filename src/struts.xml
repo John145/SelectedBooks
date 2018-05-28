@@ -22,7 +22,7 @@
     	<action name="user_*" class="userAction" method="{1}">
     		<interceptor-ref name="defaultStack"></interceptor-ref>
     		<interceptor-ref name="myLoginInterceptor">
-    			<param name="excludeMethods">login,register</param>
+    			<param name="excludeMethods">login,register,validateUsername</param>
     		</interceptor-ref>
     		<result name="input">/index.jsp</result>
     		<result name="success" type="redirectAction">book_selected</result>
@@ -56,6 +56,9 @@
     		<result name="chooseInterest" type="redirect">/user/chooseInterest.jsp</result>
     		<result name="findAll">/user/homepage.jsp</result>
     		<result name="search">/user/search.jsp</result>
+			<result name="searchByNew">/user/searchByNew.jsp</result>
+			<result name="searchByScore">/user/searchByScore.jsp</result>
+			<result name="searchByPrice">/user/searchByPrice.jsp</result>
 			<result name="searchBySort">/user/searchBySort.jsp</result>
     		<result name="BookAdminfindAll">/admin/homepage.jsp</result>
     		<result name="delete">/admin/deletesuccess.jsp</result>

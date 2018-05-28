@@ -61,13 +61,13 @@
 						</div>
 						<nav class="navbar navbar-default">
 							<ul class="nav navbar-nav">
-								<li class="active" >
+								<li>
 									<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage" />&keyword=<s:property value="keyword" />">综合</a>
 								</li>
 								<li>
 									<a href="${pageContext.request.contextPath }/book_searchByNew?curPage=<s:property value="curPage" />&keyword=<s:property value="keyword" />">最新</a>
 								</li>
-								<li>
+								<li class="active" >
 									<a href="${pageContext.request.contextPath }/book_searchByScore?curPage=<s:property value="curPage" />&keyword=<s:property value="keyword" />">评分</a>
 								</li>
 								<li>
@@ -115,10 +115,10 @@
 								<ul class="pagination" id="myul" style="display: block; text-align: center;">
 									<s:if test="curPage != 1">
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=1&keyword=<s:property value="keyword"/>">首页</a>
+											<a href="${pageContext.request.contextPath }/book_searchByScore?curPage=1&keyword=<s:property value="keyword"/>">首页</a>
 										</li>
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage-1" />&keyword=<s:property value="keyword"/>">上一页</a>
+											<a href="${pageContext.request.contextPath }/book_searchByScore?curPage=<s:property value="curPage-1" />&keyword=<s:property value="keyword"/>">上一页</a>
 										</li>
 									</s:if>
 										<li class="active">
@@ -126,10 +126,10 @@
 										</li>
 									<s:if test="curPage != totalPage && totalPage != 0">
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="curPage+1" />&keyword=<s:property value="keyword"/>">下一页</a>
+											<a href="${pageContext.request.contextPath }/book_searchByScore?curPage=<s:property value="curPage+1" />&keyword=<s:property value="keyword"/>">下一页</a>
 										</li>
 										<li>
-											<a href="${pageContext.request.contextPath }/book_search?curPage=<s:property value="totalPage" />&keyword=<s:property value="keyword"/>">尾页</a>
+											<a href="${pageContext.request.contextPath }/book_searchByScore?curPage=<s:property value="totalPage" />&keyword=<s:property value="keyword"/>">尾页</a>
 										</li>
 									</s:if>
 								</ul>
