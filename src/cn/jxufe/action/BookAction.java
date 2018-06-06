@@ -93,11 +93,10 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	}
 	
 	/**
-	 * �Ƽ�ͼ��
+	 * 推荐图书
 	 */
 	public String selected() {
 		User curUser = (User) ActionContext.getContext().getSession().get("curUser");
-		//�����û�û��ѡ����Ȥ���ã����ý���������
 		if(curUser.getInterests() == null || curUser.getInterests() == "") {
 			return "chooseInterest";
 		}

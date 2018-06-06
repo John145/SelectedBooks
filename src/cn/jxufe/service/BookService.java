@@ -6,8 +6,6 @@ import java.util.Set;
 
 import org.hibernate.criterion.DetachedCriteria;
 
-import com.opensymphony.xwork2.ActionContext;
-
 import cn.jxufe.dao.BookDao;
 import cn.jxufe.dao.MessageBoardDao;
 import cn.jxufe.dao.UserDao;
@@ -17,6 +15,7 @@ import cn.jxufe.domain.MessageBoard;
 import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.SelectedBooks;
 import cn.jxufe.domain.User;
+import cn.jxufe.util.Recommend;
 
 public class BookService {
 	private BookDao bookDao;
@@ -122,6 +121,16 @@ public class BookService {
 		selectedBooks.setBooks(new ArrayList<Book>());
 		//1、获取用户的兴趣爱好
 		User user = userDao.get(uid);
+		List<User> users = userDao.findByPage_register(0,userDao.findCount_register());
+		//推荐算法
+		if(user.getBooks().size() > 0) {
+			List<Integer> tuijian = Recommend.tuijian(users,user);
+			System.out.println(tuijian.toString());
+			for(Integer bid : tuijian) {
+				selectedBooks.getBooks().add(bookDao.findById(bid));
+			}
+		}
+		
 		String[] interests = user.getInterests().split("#");
 		//2、遍历interests，查找相应的两本书籍
 		//小说#文学#郭敬明#经典#历史#
