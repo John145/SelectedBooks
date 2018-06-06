@@ -17,6 +17,7 @@ import cn.jxufe.domain.MessageBoard;
 import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.SelectedBooks;
 import cn.jxufe.domain.User;
+import cn.jxufe.util.Recommend;
 
 public class BookService {
 	private BookDao bookDao;
@@ -92,11 +93,11 @@ public class BookService {
 	public BookAndLike findById(int bid,int uid) {
 		BookAndLike bookAndLike = new BookAndLike();
 		Book book = bookDao.findById(bid);
-		//Êé¼®Ôö¼ÓÒ»µã»÷Á¿
+		//ï¿½é¼®ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½
 		book.setClickNumber(book.getClickNumber()+1);
 		bookDao.update(book);
 		bookAndLike.setBook(book);
-		//²éÕÒÓÃ»§ÊÕ²ØµÄÊé¼®
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Õ²Øµï¿½ï¿½é¼®
 		User user = userDao.get(uid);
 		Set<Book> books = user.getBooks();
 		String isLike = "no";
@@ -107,28 +108,36 @@ public class BookService {
 			}
 		}
 		bookAndLike.setIsLike(isLike);
-		//²éÕÒÁôÑÔ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Set<MessageBoard> messageBoards = book.getMessageBoards();
 		bookAndLike.setMessageBoards(messageBoards);
 		return bookAndLike;
 	}
 	/**
-	 * ¸ù¾İÓÃ»§µÄĞËÈ¤ÍÆ¼öÏàÓ¦µÄÊé¼®
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½È¤ï¿½Æ¼ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½é¼®
 	 * @param uid
 	 * @return
 	 */
 	public SelectedBooks selected(Integer uid) {
 		SelectedBooks selectedBooks = new SelectedBooks();
 		selectedBooks.setBooks(new ArrayList<Book>());
-		//1¡¢»ñÈ¡ÓÃ»§µÄĞËÈ¤°®ºÃ
+		//1ã€è·å–ç”¨æˆ·çš„å…´è¶£çˆ±å¥½
 		User user = userDao.get(uid);
+		List<User> users = userDao.findByPage_register(0,userDao.findCount_register());
+		//æ¨èç®—æ³•
+		List<Integer> tuijian = Recommend.tuijian(users,user);
+		System.out.println(tuijian.toString());
+		for(Integer bid : tuijian) {
+			selectedBooks.getBooks().add(bookDao.findById(bid));
+		}
+		
 		String[] interests = user.getInterests().split("#");
-		//2¡¢±éÀúinterests£¬²éÕÒÏàÓ¦µÄÁ½±¾Êé¼®
-		//Ğ¡Ëµ#ÎÄÑ§#¹ù¾´Ã÷#¾­µä#ÀúÊ·#
+		//2ã€éå†interestsï¼ŒæŸ¥æ‰¾ç›¸åº”çš„ä¸¤æœ¬ä¹¦ç±
+		//å°è¯´#æ–‡å­¦#éƒ­æ•¬æ˜#ç»å…¸#å†å²#
 		for(String interest : interests) {
 			List<Book> books = bookDao.findByType(interest);
 			if(books.size() < 2) {
-				//0±¾»òÕß1±¾
+				//0æœ¬æˆ–è€…1æœ¬
 				for(int i = 0; i < books.size(); i++) {
 					selectedBooks.getBooks().add(books.get(i));
 				}
@@ -137,10 +146,10 @@ public class BookService {
 				selectedBooks.getBooks().add(books.get(1));
 			}
 		}
-		//3¡¢»ñÈ¡ËùÓĞÍ¼ÊéµÄÅÅĞĞ°ñÇ°Ê®
+		//3ã€è·å–æ‰€æœ‰å›¾ä¹¦çš„æ’è¡Œæ¦œå‰å
 		List<Book> phb = bookDao.findByClickNumber();
 		selectedBooks.setPhb(phb.subList(0, 10));
-		//ÅĞ¶ÏÊÇ·ñÓĞ10±¾ÍÆ¼öµÄÊé¼®,Èç¹û²»¹»¾ÍÈ¥ÅÅĞĞ°ñÄÃÇ°¼¸±¾
+		//åˆ¤æ–­æ˜¯å¦æœ‰10æœ¬æ¨èçš„ä¹¦ç±,å¦‚æœä¸å¤Ÿå°±å»æ’è¡Œæ¦œæ‹¿å‰å‡ æœ¬
 		int tmp = selectedBooks.getBooks().size();
 		if(selectedBooks.getBooks().size() < 10) {
 			for(int i = 0; i < 10-tmp;i++) {
