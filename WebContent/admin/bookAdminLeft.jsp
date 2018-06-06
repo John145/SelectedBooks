@@ -16,6 +16,7 @@
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_findAll?curPage=1">查询书籍</a></dd>
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_Adminadd">增加书籍</a></dd>
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
+				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_spider">一键爬取</a></dd>
 			</dl>
 			</div>
 		</div>

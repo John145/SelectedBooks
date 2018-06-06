@@ -1,7 +1,9 @@
 package cn.jxufe.action;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -19,7 +21,6 @@ import cn.jxufe.domain.PageBean;
 import cn.jxufe.domain.SelectedBooks;
 import cn.jxufe.domain.User;
 import cn.jxufe.service.BookService;
-import cn.jxufe.service.UserService;
 
 
 public class BookAction extends ActionSupport implements ModelDriven<Book> {
@@ -46,6 +47,32 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 	}
 	public void setMsgContent(String msgContent) {
 		this.msgContent = msgContent;
+	}
+	/**
+	 * 通过调用bat文件命令，操作python程序爬取新数据
+	 */
+	private String filePath;
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String spider() {
+		System.out.println("spider");
+		Runtime run = Runtime.getRuntime();     
+	    try {     
+	        Process process = run.exec("cmd.exe /k start " + filePath);  
+	        InputStream input = process.getInputStream();   
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(input));  
+	        String szline;  
+	        while ((szline = reader.readLine())!= null) {     
+	            System.out.println(szline);     
+	        }
+	        reader.close();     
+	        process.waitFor();   
+	        process.destroy();    
+	    } catch (Exception e) {              
+	        e.printStackTrace();     
+	    }
+		return "BookAdmin";
 	}
 	/**
 	 * 添加留言功能

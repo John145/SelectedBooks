@@ -52,6 +52,7 @@
     	<!-- bookAction -->
     	<action name="book_*" class="bookAction" method="{1}">
     		<interceptor-ref name="permissionStack"></interceptor-ref>
+    		<result name="BookAdmin" type="redirectAction">book_findAll?curPage=1</result>
     		<result name="selected">/user/homepage.jsp</result>
     		<result name="chooseInterest" type="redirect">/user/chooseInterest.jsp</result>
     		<result name="findAll">/user/homepage.jsp</result>
