@@ -76,14 +76,30 @@
 		<h4>修改个人信息</h4>
 		<s:actionmessage/>
 		<s:form action="user_update" method="post" id="form" theme="simple" namespace="/">
-			<a id="filea" href="javascript:;" style="background: url('${pageContext.request.contextPath }/<s:property value="%{#session.curUser.headPic}"/>');
-		background-size: 100% 100%;">
-				<input type="file" id="file" name="file"/>
-			</a>
-			性别：<s:radio  list="#{'男':'男','女':'女'}" name="sex" value="%{#session.curUser.sex}"></s:radio><br />
-			昵称：<s:textfield name="nickname" value="%{#session.curUser.nickname}"></s:textfield><br />
-			Email：<s:textfield name="email" value="%{#session.curUser.email}"></s:textfield><br />
-			地址：<s:textfield name="address" value="%{#session.curUser.address}"></s:textfield><br />
+			<div>
+				<a id="filea" href="javascript:;" style="background: url('${pageContext.request.contextPath }/<s:property value="%{#session.curUser.headPic}"/>');
+			background-size: 100% 100%;">
+					<input type="file" id="file" name="file"/>
+				</a>
+				<table>
+					<tr>
+						<td>性别：</td>
+						<td><s:radio  list="#{'男':'男','女':'女'}" name="sex" value="%{#session.curUser.sex}"></s:radio></td>
+					</tr>
+					<tr>
+						<td>昵称：</td>
+						<td><s:textfield name="nickname" value="%{#session.curUser.nickname}"></s:textfield></td>
+					</tr>
+					<tr>
+						<td>Email：</td>
+						<td><s:textfield name="email" value="%{#session.curUser.email}"></s:textfield></td>
+					</tr>
+					<tr>
+						<td>地址：</td>
+						<td><s:textfield name="address" value="%{#session.curUser.address}"></s:textfield></td>
+					</tr>
+				</table>
+			</div>
 			喜欢的书籍类型：
 			<div id="result"></div>
 			<div id="container"></div>

@@ -60,14 +60,7 @@ public class BookAction extends ActionSupport implements ModelDriven<Book> {
 		Runtime run = Runtime.getRuntime();     
 	    try {     
 	        Process process = run.exec("cmd.exe /k start " + filePath);  
-	        InputStream input = process.getInputStream();   
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(input));  
-	        String szline;  
-	        while ((szline = reader.readLine())!= null) {     
-	            System.out.println(szline);     
-	        }
-	        reader.close();     
-	        process.waitFor();   
+	        Thread.sleep(2000);
 	        process.destroy();    
 	    } catch (Exception e) {              
 	        e.printStackTrace();     

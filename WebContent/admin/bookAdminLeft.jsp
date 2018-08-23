@@ -16,9 +16,15 @@
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_findAll?curPage=1">查询书籍</a></dd>
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_Adminadd">增加书籍</a></dd>
 				<dd class="first_dd"><a href="${pageContext.request.contextPath }/user_personalinformation">个人信息</a></dd>
-				<dd class="first_dd"><a href="${pageContext.request.contextPath }/book_spider">一键爬取</a></dd>
+				<dd class="first_dd"><a onclick="spider()" style="cursor: pointer;">一键爬取</a></dd>
 			</dl>
 			</div>
 		</div>
 </body>
+<script type="text/javascript">
+	function spider(){
+		alert("爬取中...");
+		location.href="${pageContext.request.contextPath }/book_spider";
+	}
+</script>
 </html>
